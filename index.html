@@ -35,6 +35,17 @@ header.app{background:var(--surface);border-bottom:1px solid var(--ink);padding:
 .status b{color:var(--ink);font-weight:600;}
 .lede{max-width:80ch;color:var(--ink-soft);font-size:13.5px;margin:18px 0 6px;}
 .section{margin-top:34px;}
+.pq-tab{font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;
+  padding:3px 12px;margin:0 4px 8px 0;background:#fff;border:1px solid var(--rule);
+  border-radius:3px;color:var(--navy);cursor:pointer;}
+.pq-tab.pq-on{background:var(--navy);color:#fff;border-color:var(--navy);}
+details.anchor-detail{margin:6px 0;font-size:11.5px;}
+details.anchor-detail summary{font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.03em;color:var(--navy);cursor:pointer;padding:3px 0;}
+.btchip{font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;
+  color:#fff;background:var(--navy);padding:2px 9px;border-radius:3px;
+  text-decoration:none;white-space:nowrap;}
+.btchip:hover{background:#1a4a7d;}
 .pubnav{font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;
   color:var(--muted);margin:14px 0 4px;line-height:1.9;}
 .pubnav a{color:var(--navy);text-decoration:none;white-space:nowrap;}
@@ -121,7 +132,7 @@ a{color:var(--navy);}
 <header class="app">
   <div class="masthead">
     <h1>US Macro Forecast</h1>
-    <div class="status">Vintage <b>2026-06</b> &nbsp;&middot;&nbsp; Data to <b>2026Q1</b> &nbsp;&middot;&nbsp; Updated <b>2026-07-03 01:01 UTC</b></div>
+    <div class="status">Vintage <b>2026-06</b> &nbsp;&middot;&nbsp; Data to <b>2026Q1</b> &nbsp;&middot;&nbsp; Updated <b>2026-07-03 01:42 UTC</b>&nbsp;&nbsp;<a class="btchip" href="backtest.html">Backtest report &nearr;</a></div>
   </div>
 </header>
 <div class="wrap">
@@ -174,6 +185,19 @@ a{color:var(--navy);}
       <div class="explain">Each released indicator is compared with what the model
       expected; the gap (the &ldquo;news&rdquo;) is propagated to GDP through the
       model's dynamics. Net news has moved the GDP nowcast by <b>-0.15pp</b>.</div>
+    </div>
+    <div class="wedge-block">
+      <div class="tcap">News contributions by partial quarter</div>
+      <div class="explain">The nowcast spans 2 partial quarters;
+      select one to see which releases moved that quarter's GDP reading.</div>
+      <div><button type="button" class="pq-tab" data-pq="pq-pane-0">2026Q2</button><button type="button" class="pq-tab pq-on" data-pq="pq-pane-1">2026Q3</button></div>
+      <div id="pq-pane-0" class="pq-pane" style="display:none;"><table class='ftable'><thead><tr><th class='lcol'>Indicator</th><th>Contribution (pp)</th></tr></thead><tbody><tr><td class='lcol'>Housing Starts</td><td>-0.21</td></tr><tr><td class='lcol'>PCE inflation</td><td>-0.14</td></tr><tr><td class='lcol'>TR1y Rate</td><td>+0.14</td></tr><tr><td class='lcol'>Cleveland Fed 10-yr Inflation Expectations</td><td>-0.10</td></tr><tr><td class='lcol'>WTI Spot Oil Price</td><td>+0.10</td></tr><tr><td class='lcol'>Industrial Production</td><td>+0.08</td></tr><tr><td class='lcol'>Federal funds rate</td><td>+0.07</td></tr><tr><td class='lcol'>10-year Treasury yield</td><td>+0.07</td></tr><tr><td class='lcol'><b>Net news</b></td><td><b>-0.01</b></td></tr></tbody></table></div><div id="pq-pane-1" class="pq-pane" style="display:block;"><table class='ftable'><thead><tr><th class='lcol'>Indicator</th><th>Contribution (pp)</th></tr></thead><tbody><tr><td class='lcol'>Housing Starts</td><td>-0.20</td></tr><tr><td class='lcol'>Labor Force</td><td>-0.12</td></tr><tr><td class='lcol'>PCE inflation</td><td>-0.10</td></tr><tr><td class='lcol'>Federal funds rate</td><td>+0.10</td></tr><tr><td class='lcol'>TR1y Rate</td><td>+0.10</td></tr><tr><td class='lcol'>Industrial Production</td><td>+0.08</td></tr><tr><td class='lcol'>10-year Treasury yield</td><td>+0.06</td></tr><tr><td class='lcol'>Moody's Aaa</td><td>-0.06</td></tr><tr><td class='lcol'><b>Net news</b></td><td><b>-0.15</b></td></tr></tbody></table></div>
+      <script>document.querySelectorAll(".pq-tab").forEach(function(b){
+        b.addEventListener("click",function(){
+        document.querySelectorAll(".pq-pane").forEach(function(x){x.style.display="none";});
+        document.querySelectorAll(".pq-tab").forEach(function(t){t.classList.remove("pq-on");});
+        document.getElementById(b.dataset.pq).style.display="block";
+        b.classList.add("pq-on");});});</script>
     </div>
     <div class="wedge-block">
       <div class="tcap">Input surprises &mdash; actual vs the model's prior</div>
@@ -268,6 +292,7 @@ a{color:var(--navy);}
     <th class="lcol">Applies to</th><th>Constraints met</th>
     <th>Min ESS</th><th>Status</th></tr></thead>
     <tbody><tr><td class="lcol">CBO / FRED long-run anchors</td><td class="lcol">anchored unconditional</td><td>5/5</td><td>0.46</td><td style="color:#b85c00;font-weight:600">strained</td></tr><tr><td class="lcol">Analyst long-run anchors</td><td class="lcol">conditional forecast</td><td>5/5</td><td>0.38</td><td style="color:#b85c00;font-weight:600">strained</td></tr></tbody></table>
+    <details class="anchor-detail"><summary>CBO / FRED long-run anchors &mdash; constraint detail (5)</summary><table class="ftable"><thead><tr><th class="lcol">Variable</th><th class="lcol">Constraint</th><th>Target</th><th>Achieved</th><th>ESS</th></tr></thead><tbody><tr><td class="lcol">GDP</td><td class="lcol">yoy_pct_at_q</td><td>1.907</td><td>1.907</td><td>0.46</td></tr><tr><td class="lcol">CPI-U</td><td class="lcol">yoy_pct_at_q</td><td>2.489</td><td>2.489</td><td>0.46</td></tr><tr><td class="lcol">Unemployment Rate</td><td class="lcol">annual_avg_year</td><td>4.164</td><td>4.164</td><td>0.46</td></tr><tr><td class="lcol">Fed Funds Rate</td><td class="lcol">annual_avg_year</td><td>3.1</td><td>3.1</td><td>0.46</td></tr><tr><td class="lcol">TR10y Rate</td><td class="lcol">annual_avg_year</td><td>4.462</td><td>4.462</td><td>0.46</td></tr></tbody></table></details><details class="anchor-detail"><summary>Analyst long-run anchors &mdash; constraint detail (5)</summary><table class="ftable"><thead><tr><th class="lcol">Variable</th><th class="lcol">Constraint</th><th>Target</th><th>Achieved</th><th>ESS</th></tr></thead><tbody><tr><td class="lcol">GDP</td><td class="lcol">annual_avg_year</td><td>2.707e+04</td><td>2.707e+04</td><td>0.38</td></tr><tr><td class="lcol">CPI-U</td><td class="lcol">annual_avg_year</td><td>374.1</td><td>374.1</td><td>0.38</td></tr><tr><td class="lcol">Unemployment Rate</td><td class="lcol">annual_avg_year</td><td>4.3</td><td>4.3</td><td>0.38</td></tr><tr><td class="lcol">TR10y Rate</td><td class="lcol">annual_avg_year</td><td>3.91</td><td>3.91</td><td>0.38</td></tr><tr><td class="lcol">Fed Funds Rate</td><td class="lcol">annual_avg_year</td><td>3.132</td><td>3.132</td><td>0.38</td></tr></tbody></table></details>
   </div>
   
 
