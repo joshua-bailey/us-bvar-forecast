@@ -325,7 +325,7 @@ table.dec .mono{font-family:var(--mono);font-size:10.5px;}
 <header class="app"><div class="masthead">
   <h1>The model</h1>
   <div class="status">Vintage <b>2026-07</b> &nbsp;&middot;&nbsp;
-    Built <b>2026-07-18 05:16Z</b> &nbsp;&middot;&nbsp;
+    Built <b>2026-07-18 05:55Z</b> &nbsp;&middot;&nbsp;
     <a href="public_dashboard.html">&larr; back to the forecast dashboard</a></div>
 </div></header>
 <div class="wrap">
@@ -349,7 +349,7 @@ table.dec .mono{font-family:var(--mono);font-size:10.5px;}
     <div class="note">The pipeline from data to published forecasts. Every
     decision card below is pinned to one of these six stages &mdash; click a
     stage (here or in the filter row) to see only its decisions.</div>
-    <div class="panel"><svg viewBox="0 0 980 316" style="width:100%;height:auto;" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#8a8d93"/></marker></defs><g class="flow-node" data-stage="data" cursor="pointer"><rect x="12" y="14" width="196" height="96" fill="#ffffff" stroke="#e0dfd9" stroke-width="1"/><rect x="12" y="14" width="196" height="3" fill="#44474d"/><text x="22" y="34" font-size="10.5" font-weight="600" fill="#44474d" letter-spacing="1" font-family="IBM Plex Mono,monospace">1 · DATA</text><text x="22" y="50" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">32 FRED series, quarterly</text><text x="22" y="64" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">1986Q1 → today</text><text x="22" y="78" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">levels in logs ×100;</text><text x="22" y="92" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">rates left in %</text></g><g class="flow-node" data-stage="prior" cursor="pointer"><rect x="248" y="14" width="196" height="96" fill="#ffffff" stroke="#e0dfd9" stroke-width="1"/><rect x="248" y="14" width="196" height="3" fill="#003366"/><text x="258" y="34" font-size="10.5" font-weight="600" fill="#003366" letter-spacing="1" font-family="IBM Plex Mono,monospace">2 · PRIOR</text><text x="258" y="50" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">Minnesota shrinkage κ=0.04</text><text x="258" y="64" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">toward random walks (δ=1)</text><text x="258" y="78" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">+ sum-of-coefficients μ=0.2</text><text x="258" y="92" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">variant: + PLR theory φ=0.2</text></g><g class="flow-node" data-stage="engine" cursor="pointer"><rect x="484" y="14" width="196" height="96" fill="#ffffff" stroke="#e0dfd9" stroke-width="1"/><rect x="484" y="14" width="196" height="3" fill="#1f7a4d"/><text x="494" y="34" font-size="10.5" font-weight="600" fill="#1f7a4d" letter-spacing="1" font-family="IBM Plex Mono,monospace">3 · ENGINE</text><text x="494" y="50" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">Bayesian MCMC, 10k draws</text><text x="494" y="64" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">order-invariant stochastic</text><text x="494" y="78" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">volatility + outlier layer</text><text x="494" y="92" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">(Covid handled here)</text></g><g class="flow-node" data-stage="posterior" cursor="pointer"><rect x="720" y="14" width="248" height="96" fill="#ffffff" stroke="#e0dfd9" stroke-width="1"/><rect x="720" y="14" width="248" height="3" fill="#b8860b"/><text x="730" y="34" font-size="10.5" font-weight="600" fill="#b8860b" letter-spacing="1" font-family="IBM Plex Mono,monospace">4 · POSTERIOR</text><text x="730" y="50" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">1,000 stored coefficient sets</text><text x="730" y="64" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">near-unit-root by design</text><text x="730" y="78" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">(largest root ≈ 1.02) —</text><text x="730" y="92" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">see the histogram below</text></g><path d="M208,62 L246,62" stroke="#8a8d93" stroke-width="1.2" marker-end="url(#arr)"/><path d="M444,62 L482,62" stroke="#8a8d93" stroke-width="1.2" marker-end="url(#arr)"/><path d="M680,62 L718,62" stroke="#8a8d93" stroke-width="1.2" marker-end="url(#arr)"/><path d="M844,110 V140 H360 V166" fill="none" stroke="#8a8d93" stroke-width="1.2" marker-end="url(#arr)"/><path d="M844,110 V140 H762 V166" fill="none" stroke="#8a8d93" stroke-width="1.2" marker-end="url(#arr)"/><g class="flow-node" data-stage="forecast" cursor="pointer"><rect x="180" y="170" width="364" height="128" fill="#ffffff" stroke="#e0dfd9" stroke-width="1"/><rect x="180" y="170" width="364" height="3" fill="#e3120b"/><text x="190" y="190" font-size="10.5" font-weight="600" fill="#e3120b" letter-spacing="1" font-family="IBM Plex Mono,monospace">5 · FORECAST LAYER</text><text x="190" y="206" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">simulate forward → Model baseline</text><text x="190" y="220" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">+ EIU quarterly pins → Analyst-anchored</text><text x="190" y="234" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">+ long-run tilts → Benchmark-anchored</text><text x="190" y="248" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">+ PLR prior rerun → Theory-anchored</text><text x="190" y="262" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">+ partial monthly data → MF nowcast (beta)</text></g><g class="flow-node" data-stage="structural" cursor="pointer"><rect x="584" y="170" width="384" height="128" fill="#ffffff" stroke="#e0dfd9" stroke-width="1"/><rect x="584" y="170" width="384" height="3" fill="#9C4F86"/><text x="594" y="190" font-size="10.5" font-weight="600" fill="#9C4F86" letter-spacing="1" font-family="IBM Plex Mono,monospace">6 · STRUCTURAL LAYER</text><text x="594" y="206" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">what-caused-what questions, same posterior:</text><text x="594" y="220" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">recursive timing / sign restrictions /</text><text x="594" y="234" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">external instruments; variance decompositions,</text><text x="594" y="248" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">shock narratives (see the dashboard's</text><text x="594" y="262" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">experiment tabs)</text></g></svg></div>
+    <div class="panel"><svg viewBox="0 0 980 316" style="width:100%;height:auto;" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#8a8d93"/></marker></defs><g class="flow-node" data-stage="data" cursor="pointer"><rect x="12" y="14" width="196" height="96" fill="#ffffff" stroke="#e0dfd9" stroke-width="1"/><rect x="12" y="14" width="196" height="3" fill="#44474d"/><text x="22" y="34" font-size="10.5" font-weight="600" fill="#44474d" letter-spacing="1" font-family="IBM Plex Mono,monospace">1 · DATA</text><text x="22" y="50" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">32 FRED series, quarterly</text><text x="22" y="64" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">1986Q1 → today</text><text x="22" y="78" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">levels in logs ×100;</text><text x="22" y="92" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">rates left in %</text></g><g class="flow-node" data-stage="prior" cursor="pointer"><rect x="248" y="14" width="196" height="96" fill="#ffffff" stroke="#e0dfd9" stroke-width="1"/><rect x="248" y="14" width="196" height="3" fill="#003366"/><text x="258" y="34" font-size="10.5" font-weight="600" fill="#003366" letter-spacing="1" font-family="IBM Plex Mono,monospace">2 · PRIOR</text><text x="258" y="50" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">Minnesota shrinkage κ=0.04</text><text x="258" y="64" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">toward random walks (δ=1)</text><text x="258" y="78" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">+ sum-of-coefficients μ=0.2</text><text x="258" y="92" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">variant: + PLR theory φ=0.2</text></g><g class="flow-node" data-stage="engine" cursor="pointer"><rect x="484" y="14" width="196" height="96" fill="#ffffff" stroke="#e0dfd9" stroke-width="1"/><rect x="484" y="14" width="196" height="3" fill="#1f7a4d"/><text x="494" y="34" font-size="10.5" font-weight="600" fill="#1f7a4d" letter-spacing="1" font-family="IBM Plex Mono,monospace">3 · ENGINE</text><text x="494" y="50" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">Bayesian MCMC, 10k draws</text><text x="494" y="64" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">order-invariant stochastic</text><text x="494" y="78" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">volatility + outlier layer</text><text x="494" y="92" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">(Covid handled here)</text></g><g class="flow-node" data-stage="posterior" cursor="pointer"><rect x="720" y="14" width="248" height="96" fill="#ffffff" stroke="#e0dfd9" stroke-width="1"/><rect x="720" y="14" width="248" height="3" fill="#b8860b"/><text x="730" y="34" font-size="10.5" font-weight="600" fill="#b8860b" letter-spacing="1" font-family="IBM Plex Mono,monospace">4 · POSTERIOR</text><text x="730" y="50" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">1,000 stored coefficient sets</text><text x="730" y="64" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">near-unit-root by design</text><text x="730" y="78" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">(largest root ≈ 1.02) —</text><text x="730" y="92" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">see the histogram below</text></g><path d="M208,62 L246,62" stroke="#8a8d93" stroke-width="1.2" marker-end="url(#arr)"/><path d="M444,62 L482,62" stroke="#8a8d93" stroke-width="1.2" marker-end="url(#arr)"/><path d="M680,62 L718,62" stroke="#8a8d93" stroke-width="1.2" marker-end="url(#arr)"/><path d="M844,110 V140 H360 V166" fill="none" stroke="#8a8d93" stroke-width="1.2" marker-end="url(#arr)"/><path d="M844,110 V140 H762 V166" fill="none" stroke="#8a8d93" stroke-width="1.2" marker-end="url(#arr)"/><g class="flow-node" data-stage="forecast" cursor="pointer"><rect x="180" y="170" width="364" height="128" fill="#ffffff" stroke="#e0dfd9" stroke-width="1"/><rect x="180" y="170" width="364" height="3" fill="#e3120b"/><text x="190" y="190" font-size="10.5" font-weight="600" fill="#e3120b" letter-spacing="1" font-family="IBM Plex Mono,monospace">5 · FORECAST LAYER</text><text x="190" y="206" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">simulate forward → Model baseline</text><text x="190" y="220" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">+ analyst quarterly pins → Analyst-anchored</text><text x="190" y="234" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">+ long-run tilts → Benchmark-anchored</text><text x="190" y="248" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">+ PLR prior rerun → Theory-anchored</text><text x="190" y="262" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">+ partial monthly data → MF nowcast (beta)</text></g><g class="flow-node" data-stage="structural" cursor="pointer"><rect x="584" y="170" width="384" height="128" fill="#ffffff" stroke="#e0dfd9" stroke-width="1"/><rect x="584" y="170" width="384" height="3" fill="#9C4F86"/><text x="594" y="190" font-size="10.5" font-weight="600" fill="#9C4F86" letter-spacing="1" font-family="IBM Plex Mono,monospace">6 · STRUCTURAL LAYER</text><text x="594" y="206" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">what-caused-what questions, same posterior:</text><text x="594" y="220" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">recursive timing / sign restrictions /</text><text x="594" y="234" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">external instruments; variance decompositions,</text><text x="594" y="248" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">shock narratives (see the dashboard's</text><text x="594" y="262" font-size="10" fill="#44474d" font-family="IBM Plex Sans,sans-serif">experiment tabs)</text></g></svg></div>
     <div class="explain"><b>Two things worth holding onto.</b> First, stages
     2 and 3 do different jobs that are easy to conflate: the <b>prior</b>
     (stage 2) restrains the coefficients, while the <b>engine</b> (stage 3)
@@ -393,7 +393,7 @@ table.dec .mono{font-family:var(--mono);font-size:10.5px;}
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-18T01:16:55.597852</dc:date>
+    <dc:date>2026-07-18T01:55:24.760044</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -1250,7 +1250,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-18T01:16:55.611628</dc:date>
+    <dc:date>2026-07-18T01:55:24.773176</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -1504,7 +1504,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-18T01:16:55.615997</dc:date>
+    <dc:date>2026-07-18T01:55:24.777903</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -1678,7 +1678,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-18T01:16:55.625062</dc:date>
+    <dc:date>2026-07-18T01:55:24.786990</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -2788,7 +2788,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-18T01:16:55.649968</dc:date>
+    <dc:date>2026-07-18T01:55:24.815169</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -4074,7 +4074,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-18T01:16:55.678338</dc:date>
+    <dc:date>2026-07-18T01:55:24.846128</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -4770,7 +4770,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-18T01:16:55.699318</dc:date>
+    <dc:date>2026-07-18T01:55:24.871311</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -5862,7 +5862,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-18T01:16:55.723089</dc:date>
+    <dc:date>2026-07-18T01:55:24.898184</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -7131,7 +7131,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-18T01:16:55.745666</dc:date>
+    <dc:date>2026-07-18T01:55:24.922682</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -7961,7 +7961,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-18T01:16:55.766143</dc:date>
+    <dc:date>2026-07-18T01:55:24.947634</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -9006,7 +9006,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-18T01:16:55.779832</dc:date>
+    <dc:date>2026-07-18T01:55:24.963187</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -9163,7 +9163,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-18T01:16:55.782488</dc:date>
+    <dc:date>2026-07-18T01:55:24.966044</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -9272,7 +9272,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-18T01:16:55.786166</dc:date>
+    <dc:date>2026-07-18T01:55:24.969213</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -9362,7 +9362,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-18T01:16:55.791069</dc:date>
+    <dc:date>2026-07-18T01:55:24.974925</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -9888,7 +9888,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-18T01:16:55.798286</dc:date>
+    <dc:date>2026-07-18T01:55:24.981921</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -10035,7 +10035,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-18T01:16:55.810220</dc:date>
+    <dc:date>2026-07-18T01:55:24.994777</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -10812,7 +10812,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-18T01:16:55.829465</dc:date>
+    <dc:date>2026-07-18T01:55:25.014970</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -11482,7 +11482,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-18T01:16:55.843922</dc:date>
+    <dc:date>2026-07-18T01:55:25.029535</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -11910,7 +11910,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-18T01:16:55.851417</dc:date>
+    <dc:date>2026-07-18T01:55:25.037062</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -12017,7 +12017,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-18T01:16:55.871887</dc:date>
+    <dc:date>2026-07-18T01:55:25.052331</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -13585,7 +13585,7 @@ z
     further disciplines were considered and placed elsewhere. <b>Villani</b>
     (mothballed) is neither channel &mdash; it rebuilds the whole model
     around an explicit steady state, which trending log-levels do not have.
-    And the <b>long-run anchors</b> (CBO potential, EIU annual figures)
+    And the <b>long-run anchors</b> (CBO potential, analyst annual figures)
     could have been prior beliefs but are instead applied <i>after</i>
     estimation, at stage 5, by reweighting simulated futures: the prior and
     likelihood stay clean of institutional numbers, and the anchors can
@@ -13613,7 +13613,7 @@ z
       <tr><td><b>Model baseline</b></td><td class='mono'>Forecast 1</td><td>Pure unconditional posterior predictive under oi_sv</td><td class='mono'>bvar/forecasting.py</td></tr>
 <tr><td><b>Theory-anchored</b></td><td class='mono'>Forecast 5 (PLR)</td><td>Long-run relationships in the prior (GLP PLR, φ=0.2); differs from the baseline by the prior only</td><td class='mono'>bvar/plr.py</td></tr>
 <tr><td><b>Benchmark-anchored</b></td><td class='mono'>Forecast 2</td><td>Baseline + joint entropic tilt to CBO potential and FRED/FOMC long-run rates</td><td class='mono'>bvar/longrun_anchors.py</td></tr>
-<tr><td><b>Analyst-anchored</b></td><td class='mono'>Forecast 3 — the headline</td><td>EIU quarterly hard pins (Kalman smoother) + the 5-year annual-average tilt</td><td class='mono'>bvar/conditions.py</td></tr>
+<tr><td><b>Analyst-anchored</b></td><td class='mono'>Forecast 3 — the headline</td><td>analyst-baseline quarterly hard pins (Kalman smoother) + the 5-year annual-average tilt</td><td class='mono'>bvar/conditions.py</td></tr>
 <tr><td><b>MF nowcast fold-in</b></td><td class='mono'>Forecast 4 (BETA)</td><td>Monthly mixed-frequency BVAR folded into the baseline's current quarter (--mf-nowcast)</td><td class='mono'>bvar/mfbvar.py</td></tr>
     </table></div>
     <div class="tcap gap-top">How each is produced and read (as published on the dashboard)</div>
@@ -14017,7 +14017,7 @@ z
     <div class="tl-item">
       <div class="tl-date">2026-02</div>
       <div class="tl-dotcol"><span class="tl-dot"></span></div>
-      <div class="tl-body"><b>Python port</b><br>Full reimplementation on free FRED data with an R-match test suite; EIU baselines move from Excel to the API with local caching.</div>
+      <div class="tl-body"><b>Python port</b><br>Full reimplementation on free FRED data with an R-match test suite; analyst baselines move from Excel to an API feed with local caching.</div>
     </div>
     <div class="tl-item">
       <div class="tl-date">2026-03</div>
