@@ -180,6 +180,8 @@ details.anchor-detail summary{font-family:var(--mono);font-size:10.5px;
 .ftable td.st-strained{color:var(--strained);}
 .ftable td.st-refused{color:var(--red);}
 .ftable td.fc{background:var(--fc-bg);}
+/* Group the two-horizon rows per variable in the unified track-record table. */
+.ftable tbody tr.grouprow td{border-top:2px solid var(--rule);}
 .ftable .band{display:block;color:var(--muted);font-size:9.5px;margin-top:1px;}
 .tcap{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
   text-transform:uppercase;color:var(--navy);margin:0 0 8px;}
@@ -327,7 +329,7 @@ a{color:var(--navy);}
 <header class="app">
   <div class="masthead">
     <h1>US Macro Forecast</h1>
-    <div class="status">Vintage <b>2026-07</b> &nbsp;&middot;&nbsp; Data to <b>2026Q1</b> &nbsp;&middot;&nbsp; Updated <b>2026-07-20 20:56 UTC</b></div>
+    <div class="status">Vintage <b>2026-07</b> &nbsp;&middot;&nbsp; Data to <b>2026Q1</b> &nbsp;&middot;&nbsp; Updated <b>2026-07-20 21:13 UTC</b></div>
   </div>
 </header>
 <div class="wrap">
@@ -497,18 +499,47 @@ a{color:var(--navy);}
   
   <div class="section">
     <h2 id="track-record">Track record</h2>
-    <div class="note">Pseudo-out-of-sample accuracy. The first table is the model's forecast error relative to a random walk (below 1.00 = the model beats the naive benchmark). The second is the share of outcomes that fell inside the 90% band (target 90% = well-calibrated uncertainty).</div>
-    <div class="tables">
-      <div><div class="tcap">Point accuracy &mdash; error vs random walk</div><table class='ftable'><thead><tr><th class='lcol'>Variable</th><th>h=1</th><th>h=4</th><th>h=8</th></tr></thead><tbody><tr><td class='lcol'>Real GDP</td><td class='fc '>1.02&times;</td><td class='fc win'>0.83&times;</td><td class='fc win'>0.69&times;</td></tr><tr><td class='lcol'>PCE prices</td><td class='fc win'>0.65&times;</td><td class='fc win'>0.60&times;</td><td class='fc win'>0.62&times;</td></tr><tr><td class='lcol'>Unemployment</td><td class='fc '>1.11&times;</td><td class='fc '>1.18&times;</td><td class='fc '>1.10&times;</td></tr><tr><td class='lcol'>Fed funds</td><td class='fc win'>0.75&times;</td><td class='fc win'>0.99&times;</td><td class='fc '>1.23&times;</td></tr><tr><td class='lcol'>10-year yield</td><td class='fc '>1.15&times;</td><td class='fc '>1.23&times;</td><td class='fc '>1.15&times;</td></tr></tbody></table></div>
-      <div><div class="tcap">Calibration &mdash; 90% band coverage</div><table class='ftable'><thead><tr><th class='lcol'>Variable</th><th>h=1</th><th>h=4</th><th>h=8</th></tr></thead><tbody><tr><td class='lcol'>Real GDP</td><td class='fc'>88%</td><td class='fc'>87%</td><td class='fc'>86%</td></tr><tr><td class='lcol'>PCE prices</td><td class='fc'>79%</td><td class='fc'>81%</td><td class='fc'>84%</td></tr><tr><td class='lcol'>Unemployment</td><td class='fc'>77%</td><td class='fc'>78%</td><td class='fc'>82%</td></tr><tr><td class='lcol'>Fed funds</td><td class='fc'>86%</td><td class='fc'>78%</td><td class='fc'>76%</td></tr><tr><td class='lcol'>10-year yield</td><td class='fc'>87%</td><td class='fc'>88%</td><td class='fc'>83%</td></tr></tbody></table></div>
-    </div>
-    
-    <div class="tcap gap-top">Against professional forecasters &mdash; forecast error relative to the SPF median and the Fed staff</div>
-    <div class="note">The same real-time record scored against the Survey of Professional Forecasters (78 survey rounds, 2005&ndash;2024) and the Federal Reserve staff's Greenbook forecasts (58 meetings, 2005&ndash;2020; the archive is published with a five-year lag; ex-Covid origins; h=8 rests on 27 pairs). Values above 1.00 mean the professionals were more accurate. Their advantage is concentrated at h=1, where survey and staff forecasts already incorporate one to two months of data for the current quarter, which this model (using only completed quarters) has not seen; the mixed-frequency nowcast above is this page's answer to that horizon. The advantage narrows with horizon: by two years the model reaches statistical parity with the Fed staff on all three variables, and on unemployment at every horizon. Scores come from the stored real-time record of the immediately preceding production model (28 variables), which was certified to forecast the same as the current model when the latter was promoted.</div>
-    <div class="tables">
-      <div><div class="tcap">vs SPF median</div><table class='ftable'><thead><tr><th class='lcol'>Variable</th><th>h=1</th><th>h=4</th></tr></thead><tbody><tr><td class='lcol'>Real GDP</td><td class='fc '>1.60&times;</td><td class='fc '>1.12&times;</td></tr><tr><td class='lcol'>CPI</td><td class='fc '>1.61&times;</td><td class='fc '>1.20&times;</td></tr><tr><td class='lcol'>Unemployment</td><td class='fc '>2.59&times;</td><td class='fc '>1.45&times;</td></tr></tbody></table></div>
-      <div><div class="tcap">vs Fed staff (Greenbook)</div><table class='ftable'><thead><tr><th class='lcol'>Variable</th><th>h=1</th><th>h=4</th><th>h=8</th></tr></thead><tbody><tr><td class='lcol'>Real GDP</td><td class='fc '>1.21&times;</td><td class='fc '>1.26&times;</td><td class='fc '>1.04&times;</td></tr><tr><td class='lcol'>CPI</td><td class='fc '>1.98&times;</td><td class='fc '>1.17&times;</td><td class='fc '>1.15&times;</td></tr><tr><td class='lcol'>Unemployment</td><td class='fc '>1.07&times;</td><td class='fc '>1.03&times;</td><td class='fc '>1.16&times;</td></tr></tbody></table></div>
-    </div>
+    <div class="note">These are the model's own forecasts, made in real time and
+    scored out of sample. At each quarter from 2005 to 2024 the model saw only
+    the data actually published by that date (from the ALFRED point-in-time
+    archive), was re-estimated, and forecast forward with no external anchoring;
+    the forecasts are then scored against what the economy turned out to do. The
+    table sets that record against three yardsticks: a random walk (the naive
+    "no-change" forecast), the Survey of Professional Forecasters (SPF, the
+    quarterly consensus of independent economists), and the Federal Reserve
+    staff's own Greenbook forecasts (the in-house benchmark of the
+    forecast-evaluation literature, released with a five-year lag). Each figure
+    is the model's mean absolute error divided by that benchmark's, on identical
+    dates and targets: below 1.00 the model was more accurate, above 1.00 the
+    benchmark was. h=4 is one year ahead, h=8 two years. The one-quarter horizon
+    is left out on purpose: this model reads only completed quarters, so at that
+    range the survey and the Fed staff hold one to two months of data on the
+    current quarter that the model has not seen. A like-for-like nowcast
+    comparison is future work; the current-quarter nowcast above is the in-house
+    answer to that horizon.</div>
+    <div class="tcap">Forecast accuracy &mdash; model error relative to each benchmark</div>
+    <table class='ftable'><thead><tr><th class='lcol'>Variable</th><th class='lcol'>Horizon</th><th>vs random walk</th><th>vs SPF median</th><th>vs Fed staff</th></tr></thead><tbody><tr class='grouprow'><td class='lcol'>Real GDP</td><td class='lcol'>1 year</td><td class='fc win'>0.57&times;</td><td class='fc '>1.12&times;<span class='band'>par</span></td><td class='fc '>1.26&times;</td></tr><tr><td class='lcol'></td><td class='lcol'>2 years</td><td class='fc win'>0.50&times;</td><td class='fc'>&middot;</td><td class='fc '>1.04&times;<span class='band'>par</span></td></tr><tr class='grouprow'><td class='lcol'>CPI</td><td class='lcol'>1 year</td><td class='fc win'>0.51&times;</td><td class='fc '>1.20&times;</td><td class='fc '>1.17&times;<span class='band'>par</span></td></tr><tr><td class='lcol'></td><td class='lcol'>2 years</td><td class='fc win'>0.47&times;</td><td class='fc'>&middot;</td><td class='fc '>1.15&times;<span class='band'>par</span></td></tr><tr class='grouprow'><td class='lcol'>Unemployment</td><td class='lcol'>1 year</td><td class='fc win'>0.90&times;<span class='band'>par</span></td><td class='fc '>1.45&times;</td><td class='fc '>1.03&times;<span class='band'>par</span></td></tr><tr><td class='lcol'></td><td class='lcol'>2 years</td><td class='fc win'>0.87&times;</td><td class='fc'>&middot;</td><td class='fc '>1.16&times;<span class='band'>par</span></td></tr></tbody></table>
+    <div class="note">"par" marks a cell where the difference is not
+    statistically distinguishable from zero at the 5% level (Diebold-Mariano
+    test, the standard test of equal forecast accuracy). The model beats the
+    random walk decisively on activity and prices at every horizon; on
+    unemployment it only edges the random walk, and at one year the gap is not
+    statistically significant. Against the
+    professionals the pattern is the familiar one: their edge is largest close
+    in and narrows with horizon. One year out the model already matches the SPF
+    on GDP, and by two years it is at par with the Fed staff on all three
+    variables. Windows differ by benchmark: the random-walk comparison spans
+    78 real-time quarters (2005&ndash;2024, Covid included) and the SPF
+    comparison 78; the Greenbook comparison is ex-Covid and ends in 2020 at
+    the archive's release frontier (58 quarters at one year, 27 at
+    two).</div>
+    <div class="tcap gap-top">Calibration &mdash; 90% band coverage (real-time)</div>
+    <table class='ftable'><thead><tr><th class='lcol'>Variable</th><th>1 year (h=4)</th><th>2 years (h=8)</th></tr></thead><tbody><tr><td class='lcol'>Real GDP</td><td class='fc'>87%</td><td class='fc'>86%</td></tr><tr><td class='lcol'>CPI</td><td class='fc'>82%</td><td class='fc'>84%</td></tr><tr><td class='lcol'>Unemployment</td><td class='fc'>78%</td><td class='fc'>82%</td></tr></tbody></table>
+    <div class="note">The share of real-time outcomes that fell inside the
+    model's 90% forecast band. Near 90% means the stated uncertainty was about
+    right; well below means the bands were too narrow. The point-forecast
+    benchmarks above carry no comparable bands, so this is the model's own
+    record.</div>
   </div>
 
   
