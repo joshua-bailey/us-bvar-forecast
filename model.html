@@ -291,6 +291,27 @@ a{color:var(--navy);}
 .pubnav2 .xlinks a{color:var(--navy);text-decoration:none;white-space:nowrap;}
 .pubnav2 .xlinks a + a::before{content:"\00B7";color:var(--rule-sep);margin:0 9px;}
 @media(max-width:760px){.pubnav2 .plabel{min-width:100%;margin-bottom:2px;}}
+/* Compact "four forecasts, explained" block that sits directly under the
+   headline charts: four small schematics + a one-line gloss each, with the full
+   mechanics and a worked example behind a native <details> toggle. */
+.fx{margin-top:6px;}
+.fx-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:8px;}
+@media(max-width:760px){.fx-grid{grid-template-columns:repeat(2,1fr);}}
+.fx-card{background:var(--surface);border:1px solid var(--rule);padding:9px 11px 8px;}
+.fx-card .fx-name{font-family:var(--mono);font-size:10px;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--c);font-weight:600;margin-bottom:2px;}
+.fx-card .explainer-svg{max-width:150px;height:auto;display:block;margin:2px 0 0;}
+.fx-card .fx-mech{font-size:11px;color:var(--ink-soft);line-height:1.4;margin-top:5px;}
+.fx-more{margin-top:12px;}
+.fx-more > summary{font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;
+  color:var(--navy);cursor:pointer;padding:5px 2px;}
+.fx-more > summary:hover{text-decoration:underline;}
+.fx-detail{margin-top:6px;}
+.fx-row{padding:8px 0;border-top:1px solid var(--rule);}
+.fx-row:first-child{border-top:none;}
+.fx-rname{font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;
+  text-transform:uppercase;color:var(--c);font-weight:600;margin-right:8px;}
+.fx-rmech{font-size:12px;color:var(--ink-soft);line-height:1.5;}
 
 table.dec{width:100%;border-collapse:collapse;font-size:12.5px;}
 table.dec td,table.dec th{padding:6px 8px;border-bottom:1px solid var(--rule);
@@ -360,7 +381,7 @@ table.dec .mono{font-family:var(--mono);font-size:10.5px;}
 <header class="app"><div class="masthead">
   <h1>The model</h1>
   <div class="status">Vintage <b>2026-07</b> &nbsp;&middot;&nbsp;
-    Built <b>2026-07-20 18:27 UTC</b> &nbsp;&middot;&nbsp;
+    Built <b>2026-07-20 19:08 UTC</b> &nbsp;&middot;&nbsp;
     <a href="index.html">&larr; back to the forecast dashboard</a></div>
 </div></header>
 <div class="wrap">
@@ -378,7 +399,7 @@ table.dec .mono{font-family:var(--mono);font-size:10.5px;}
   time-series background; the interactive BVAR course teaches the
   underlying concepts in depth, and the forecast dashboard shows the
   current output.</p>
-  <nav class="pubnav2"><div class="pgroup"><a class="plabel" href="#part-i">I &middot; The model, technically</a><span class="psecs"><a href="#the-model-at-a-glance">The model at a glance</a><a href="#the-model-written-out">The model, written out</a><a href="#inside-stage-2-the-prior-piece-by-piece">Inside stage 2</a><a href="#what-makes-up-the-model">What makes up the model</a><a href="#what-comes-out-the-five-forecast-objects">What comes out</a><a href="#two-charts-that-explain-a-lot">Two charts that explain a lot</a></span></div><div class="pgroup"><a class="plabel" href="#part-ii">II &middot; How the model behaves</a><span class="psecs"><a href="#what-drives-the-forecast-variance-decomposition">What drives the forecast</a><a href="#what-drove-the-economy-shock-decomposition">What drove the economy</a><a href="#how-the-economy-responds-to-shocks-impulse-responses">How the economy responds to shocks</a><a href="#anchor-diagnostics">Anchor diagnostics</a></span></div><div class="pgroup"><a class="plabel" href="#part-iii">III &middot; Design decisions</a><span class="psecs"><a href="#estimation-prior-decisions">Estimation &amp; prior decisions</a><a href="#variable-set-variants">Variable-set variants</a></span></div><div class="pgroup"><a class="plabel" href="#part-iv">IV &middot; How the model got here</a><span class="psecs"><a href="#how-the-model-got-here">How the model got here</a><a href="#shadow-model-cross-check">Shadow model cross-check</a><a href="#shadow-model">Shadow model</a></span></div></nav>
+  <nav class="pubnav2"><div class="pgroup"><a class="plabel" href="#part-i">I &middot; The model, technically</a><span class="psecs"><a href="#the-model-at-a-glance">The model at a glance</a><a href="#the-model-written-out">The model, written out</a><a href="#inside-stage-2-the-prior-piece-by-piece">Inside stage 2</a><a href="#what-makes-up-the-model">What makes up the model</a><a href="#what-comes-out-the-five-forecast-objects">What comes out</a><a href="#two-charts-that-explain-a-lot">Two charts that explain a lot</a></span></div><div class="pgroup"><a class="plabel" href="#part-ii">II &middot; How the model behaves</a><span class="psecs"><a href="#what-drove-the-economy-shock-decomposition">What drove the economy</a><a href="#how-the-economy-responds-to-shocks-impulse-responses">How the economy responds to shocks</a><a href="#anchor-diagnostics">Anchor diagnostics</a></span></div><div class="pgroup"><a class="plabel" href="#part-iii">III &middot; Design decisions</a><span class="psecs"><a href="#estimation-prior-decisions">Estimation &amp; prior decisions</a><a href="#variable-set-variants">Variable-set variants</a></span></div><div class="pgroup"><a class="plabel" href="#part-iv">IV &middot; How the model got here</a><span class="psecs"><a href="#how-the-model-got-here">How the model got here</a><a href="#shadow-model-cross-check">Shadow model cross-check</a><a href="#shadow-model">Shadow model</a></span></div></nav>
 
   <div class="partband" id="part-i" data-part="I"><span class="pnum">I</span><span class="ptitle">The model, technically</span><span class="psub">what it is, written out, and what it produces</span></div>
   <div class="section"><h2 id="the-model-at-a-glance">The model at a glance</h2>
@@ -429,7 +450,7 @@ table.dec .mono{font-family:var(--mono);font-size:10.5px;}
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-20T14:23:42.971859</dc:date>
+    <dc:date>2026-07-20T15:05:12.607118</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -1286,7 +1307,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-20T14:23:42.985215</dc:date>
+    <dc:date>2026-07-20T15:05:12.627834</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -1540,7 +1561,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-20T14:23:42.991601</dc:date>
+    <dc:date>2026-07-20T15:05:12.633108</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -1714,7 +1735,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-20T14:23:43.009885</dc:date>
+    <dc:date>2026-07-20T15:05:12.642895</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -2824,7 +2845,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-20T14:23:43.067607</dc:date>
+    <dc:date>2026-07-20T15:05:12.678321</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -4110,7 +4131,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-20T14:23:43.115143</dc:date>
+    <dc:date>2026-07-20T15:05:12.711702</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -4806,7 +4827,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-20T14:23:43.138979</dc:date>
+    <dc:date>2026-07-20T15:05:12.734752</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -5898,7 +5919,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-20T14:23:43.166850</dc:date>
+    <dc:date>2026-07-20T15:05:12.760480</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -7167,7 +7188,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-20T14:23:43.207688</dc:date>
+    <dc:date>2026-07-20T15:05:12.796955</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -7997,7 +8018,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-20T14:23:43.235598</dc:date>
+    <dc:date>2026-07-20T15:05:12.819645</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -9042,7 +9063,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-20T14:23:43.259656</dc:date>
+    <dc:date>2026-07-20T15:05:12.835321</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -9199,7 +9220,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-20T14:23:43.263611</dc:date>
+    <dc:date>2026-07-20T15:05:12.838709</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -9308,7 +9329,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-20T14:23:43.267466</dc:date>
+    <dc:date>2026-07-20T15:05:12.842157</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -9398,7 +9419,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-20T14:23:43.273958</dc:date>
+    <dc:date>2026-07-20T15:05:12.847707</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -9924,7 +9945,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-20T14:23:43.282876</dc:date>
+    <dc:date>2026-07-20T15:05:12.854237</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -10071,7 +10092,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-20T14:23:43.312523</dc:date>
+    <dc:date>2026-07-20T15:05:12.867355</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -10848,7 +10869,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-20T14:23:43.338490</dc:date>
+    <dc:date>2026-07-20T15:05:12.887692</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -11518,7 +11539,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-20T14:23:43.356662</dc:date>
+    <dc:date>2026-07-20T15:05:12.901508</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -11946,7 +11967,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-20T14:23:43.365444</dc:date>
+    <dc:date>2026-07-20T15:05:12.910376</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -12053,7 +12074,7 @@ z
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-20T14:23:43.383827</dc:date>
+    <dc:date>2026-07-20T15:05:12.938593</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -13723,53 +13744,6 @@ z
   </div>
 
   <div class="partband" id="part-ii" data-part="II"><span class="pnum">II</span><span class="ptitle">How the model behaves</span><span class="psub">what drives the forecast, what drove the economy, how it responds to shocks, and whether the anchors hold</span></div>
-
-  <div class="section">
-    <h2 id="what-drives-the-forecast-variance-decomposition">What drives the forecast &mdash; variance decomposition</h2>
-    <div class="note">Where the forecast's uncertainty comes from, under two ways of splitting it (tabs): by the <b>variable group</b> the surprise originates in, or by <b>named economic shock</b>. The same decomposition under the <b>shadow model</b> (the previous production model, run alongside each vintage) is in the <a href="#shadow-model">Shadow model</a> section below. This is a property of the estimated model's own dynamics &mdash; the <b>Model baseline</b> forecast; the anchors reweight paths afterwards and do not change it.</div>
-    <div class="exptabs" data-group="fevd" style="margin:14px 0 2px;"><button class="pq-tab pq-on" data-pane="groups" aria-pressed="true">By variable group &middot; recursive</button><button class="pq-tab" data-pane="named" aria-pressed="false">By named shock &middot; sign restrictions</button></div><div class="exp-pane" data-group="fevd" data-pane="groups">
-  <div class="irf-block">
-    <h3>By variable group &mdash; recursive ordering</h3>
-    <div class="note">Share of each variable's forecast-error variance attributable to each shock group, by horizon. Shocks are grouped by the variable they originate in, under the model's recursive (Cholesky) ordering. Hover for shares.</div>
-    <div class="panel"><div id="fevd" class="vega-chart"></div>
-<script>vegaEmbed("#fevd", {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}, "background": "#ffffff"}, "data": {"name": "data-140d255ee7570c3a3536c6781c91a168"}, "facet": {"field": "target", "header": {"labelColor": "#16181c", "labelFont": "IBM Plex Sans", "labelFontSize": 11.5, "labelFontWeight": 600}, "sort": ["Real GDP growth", "PCE inflation", "Unemployment rate", "Federal funds rate", "10-year Treasury yield"], "title": null, "type": "nominal"}, "spec": {"mark": {"type": "bar", "stroke": "white", "strokeWidth": 0.5}, "encoding": {"color": {"field": "group", "scale": {"domain": ["Real activity", "Labour & industry", "Prices", "Financial", "Oil / EPU / infl. exp."], "range": ["#003366", "#6B9AC4", "#E3120B", "#97999B", "#F2E0C9"]}, "sort": ["Real activity", "Labour & industry", "Prices", "Financial", "Oil / EPU / infl. exp."], "title": "Shock group", "type": "nominal"}, "order": {"field": "group", "sort": "ascending", "type": "nominal"}, "tooltip": [{"field": "target", "title": "Variable", "type": "nominal"}, {"field": "horizon", "title": "Horizon", "type": "nominal"}, {"field": "group", "title": "Shock group", "type": "nominal"}, {"field": "share", "format": ".0f", "title": "Share", "type": "quantitative"}], "x": {"axis": {"labelAngle": 0}, "field": "horizon", "sort": ["1Q", "1y", "2y", "5y", "10y"], "title": null, "type": "nominal"}, "y": {"field": "share", "scale": {"domain": [0, 100]}, "stack": "zero", "title": "% of variance", "type": "quantitative"}}, "height": 180, "width": 150}, "columns": 3, "$schema": "https://vega.github.io/schema/vega-lite/v6.4.1.json", "datasets": {"data-140d255ee7570c3a3536c6781c91a168": [{"target": "Real GDP growth", "horizon": "1Q", "hsort": 0, "group": "Real activity", "share": 100.0}, {"target": "Real GDP growth", "horizon": "1Q", "hsort": 0, "group": "Labour & industry", "share": 0.0}, {"target": "Real GDP growth", "horizon": "1Q", "hsort": 0, "group": "Prices", "share": 0.0}, {"target": "Real GDP growth", "horizon": "1Q", "hsort": 0, "group": "Financial", "share": 0.0}, {"target": "Real GDP growth", "horizon": "1Q", "hsort": 0, "group": "Oil / EPU / infl. exp.", "share": 0.0}, {"target": "Real GDP growth", "horizon": "1y", "hsort": 1, "group": "Real activity", "share": 85.78773405838552}, {"target": "Real GDP growth", "horizon": "1y", "hsort": 1, "group": "Labour & industry", "share": 7.806595565861097}, {"target": "Real GDP growth", "horizon": "1y", "hsort": 1, "group": "Prices", "share": 1.9745142828536364}, {"target": "Real GDP growth", "horizon": "1y", "hsort": 1, "group": "Financial", "share": 3.837207684183782}, {"target": "Real GDP growth", "horizon": "1y", "hsort": 1, "group": "Oil / EPU / infl. exp.", "share": 0.5939484087159537}, {"target": "Real GDP growth", "horizon": "2y", "hsort": 2, "group": "Real activity", "share": 75.15077575005554}, {"target": "Real GDP growth", "horizon": "2y", "hsort": 2, "group": "Labour & industry", "share": 13.840375317243309}, {"target": "Real GDP growth", "horizon": "2y", "hsort": 2, "group": "Prices", "share": 3.0861800096216654}, {"target": "Real GDP growth", "horizon": "2y", "hsort": 2, "group": "Financial", "share": 6.788531180705462}, {"target": "Real GDP growth", "horizon": "2y", "hsort": 2, "group": "Oil / EPU / infl. exp.", "share": 1.1341377423740244}, {"target": "Real GDP growth", "horizon": "5y", "hsort": 3, "group": "Real activity", "share": 61.30917297314379}, {"target": "Real GDP growth", "horizon": "5y", "hsort": 3, "group": "Labour & industry", "share": 19.514292252426095}, {"target": "Real GDP growth", "horizon": "5y", "hsort": 3, "group": "Prices", "share": 4.58327371417984}, {"target": "Real GDP growth", "horizon": "5y", "hsort": 3, "group": "Financial", "share": 12.28474279169949}, {"target": "Real GDP growth", "horizon": "5y", "hsort": 3, "group": "Oil / EPU / infl. exp.", "share": 2.3085182685507837}, {"target": "Real GDP growth", "horizon": "10y", "hsort": 4, "group": "Real activity", "share": 46.09253263544152}, {"target": "Real GDP growth", "horizon": "10y", "hsort": 4, "group": "Labour & industry", "share": 25.071794711400806}, {"target": "Real GDP growth", "horizon": "10y", "hsort": 4, "group": "Prices", "share": 6.7289637738002135}, {"target": "Real GDP growth", "horizon": "10y", "hsort": 4, "group": "Financial", "share": 18.231033118830002}, {"target": "Real GDP growth", "horizon": "10y", "hsort": 4, "group": "Oil / EPU / infl. exp.", "share": 3.8756757605274563}, {"target": "PCE inflation", "horizon": "1Q", "hsort": 0, "group": "Real activity", "share": 18.907881663630636}, {"target": "PCE inflation", "horizon": "1Q", "hsort": 0, "group": "Labour & industry", "share": 45.57982132584055}, {"target": "PCE inflation", "horizon": "1Q", "hsort": 0, "group": "Prices", "share": 35.51229701052881}, {"target": "PCE inflation", "horizon": "1Q", "hsort": 0, "group": "Financial", "share": 0.0}, {"target": "PCE inflation", "horizon": "1Q", "hsort": 0, "group": "Oil / EPU / infl. exp.", "share": 0.0}, {"target": "PCE inflation", "horizon": "1y", "hsort": 1, "group": "Real activity", "share": 22.24670787598164}, {"target": "PCE inflation", "horizon": "1y", "hsort": 1, "group": "Labour & industry", "share": 42.47963497739175}, {"target": "PCE inflation", "horizon": "1y", "hsort": 1, "group": "Prices", "share": 33.903797218816194}, {"target": "PCE inflation", "horizon": "1y", "hsort": 1, "group": "Financial", "share": 1.0288294131698952}, {"target": "PCE inflation", "horizon": "1y", "hsort": 1, "group": "Oil / EPU / infl. exp.", "share": 0.34103051464052136}, {"target": "PCE inflation", "horizon": "2y", "hsort": 2, "group": "Real activity", "share": 24.142772345275674}, {"target": "PCE inflation", "horizon": "2y", "hsort": 2, "group": "Labour & industry", "share": 43.01926728168769}, {"target": "PCE inflation", "horizon": "2y", "hsort": 2, "group": "Prices", "share": 30.236303791995823}, {"target": "PCE inflation", "horizon": "2y", "hsort": 2, "group": "Financial", "share": 2.1085526606860836}, {"target": "PCE inflation", "horizon": "2y", "hsort": 2, "group": "Oil / EPU / infl. exp.", "share": 0.4931039203547274}, {"target": "PCE inflation", "horizon": "5y", "hsort": 3, "group": "Real activity", "share": 27.653590448802994}, {"target": "PCE inflation", "horizon": "5y", "hsort": 3, "group": "Labour & industry", "share": 42.2373239303449}, {"target": "PCE inflation", "horizon": "5y", "hsort": 3, "group": "Prices", "share": 21.067297483807366}, {"target": "PCE inflation", "horizon": "5y", "hsort": 3, "group": "Financial", "share": 7.7332588035989716}, {"target": "PCE inflation", "horizon": "5y", "hsort": 3, "group": "Oil / EPU / infl. exp.", "share": 1.30852933344577}, {"target": "PCE inflation", "horizon": "10y", "hsort": 4, "group": "Real activity", "share": 30.411912885196564}, {"target": "PCE inflation", "horizon": "10y", "hsort": 4, "group": "Labour & industry", "share": 38.132724207100225}, {"target": "PCE inflation", "horizon": "10y", "hsort": 4, "group": "Prices", "share": 13.235175487342909}, {"target": "PCE inflation", "horizon": "10y", "hsort": 4, "group": "Financial", "share": 15.433160636152584}, {"target": "PCE inflation", "horizon": "10y", "hsort": 4, "group": "Oil / EPU / infl. exp.", "share": 2.7870267842077245}, {"target": "Unemployment rate", "horizon": "1Q", "hsort": 0, "group": "Real activity", "share": 31.545537992388997}, {"target": "Unemployment rate", "horizon": "1Q", "hsort": 0, "group": "Labour & industry", "share": 68.454462007611}, {"target": "Unemployment rate", "horizon": "1Q", "hsort": 0, "group": "Prices", "share": 0.0}, {"target": "Unemployment rate", "horizon": "1Q", "hsort": 0, "group": "Financial", "share": 0.0}, {"target": "Unemployment rate", "horizon": "1Q", "hsort": 0, "group": "Oil / EPU / infl. exp.", "share": 0.0}, {"target": "Unemployment rate", "horizon": "1y", "hsort": 1, "group": "Real activity", "share": 47.69280154627649}, {"target": "Unemployment rate", "horizon": "1y", "hsort": 1, "group": "Labour & industry", "share": 46.455707922507784}, {"target": "Unemployment rate", "horizon": "1y", "hsort": 1, "group": "Prices", "share": 2.1471737769476373}, {"target": "Unemployment rate", "horizon": "1y", "hsort": 1, "group": "Financial", "share": 2.9850164026272443}, {"target": "Unemployment rate", "horizon": "1y", "hsort": 1, "group": "Oil / EPU / infl. exp.", "share": 0.7193003516408418}, {"target": "Unemployment rate", "horizon": "2y", "hsort": 2, "group": "Real activity", "share": 46.49816485721437}, {"target": "Unemployment rate", "horizon": "2y", "hsort": 2, "group": "Labour & industry", "share": 43.25104399602883}, {"target": "Unemployment rate", "horizon": "2y", "hsort": 2, "group": "Prices", "share": 3.387442020655854}, {"target": "Unemployment rate", "horizon": "2y", "hsort": 2, "group": "Financial", "share": 5.6754496264769845}, {"target": "Unemployment rate", "horizon": "2y", "hsort": 2, "group": "Oil / EPU / infl. exp.", "share": 1.187899499623979}, {"target": "Unemployment rate", "horizon": "5y", "hsort": 3, "group": "Real activity", "share": 42.598916963091696}, {"target": "Unemployment rate", "horizon": "5y", "hsort": 3, "group": "Labour & industry", "share": 40.02735790091041}, {"target": "Unemployment rate", "horizon": "5y", "hsort": 3, "group": "Prices", "share": 5.912660314003694}, {"target": "Unemployment rate", "horizon": "5y", "hsort": 3, "group": "Financial", "share": 9.452014995395684}, {"target": "Unemployment rate", "horizon": "5y", "hsort": 3, "group": "Oil / EPU / infl. exp.", "share": 2.0090498265985217}, {"target": "Unemployment rate", "horizon": "10y", "hsort": 4, "group": "Real activity", "share": 37.4756487284423}, {"target": "Unemployment rate", "horizon": "10y", "hsort": 4, "group": "Labour & industry", "share": 36.259292580924594}, {"target": "Unemployment rate", "horizon": "10y", "hsort": 4, "group": "Prices", "share": 7.307731298793324}, {"target": "Unemployment rate", "horizon": "10y", "hsort": 4, "group": "Financial", "share": 15.85899723025026}, {"target": "Unemployment rate", "horizon": "10y", "hsort": 4, "group": "Oil / EPU / infl. exp.", "share": 3.098330161589521}, {"target": "Federal funds rate", "horizon": "1Q", "hsort": 0, "group": "Real activity", "share": 19.42528750016093}, {"target": "Federal funds rate", "horizon": "1Q", "hsort": 0, "group": "Labour & industry", "share": 17.957976369080164}, {"target": "Federal funds rate", "horizon": "1Q", "hsort": 0, "group": "Prices", "share": 5.430807433812982}, {"target": "Federal funds rate", "horizon": "1Q", "hsort": 0, "group": "Financial", "share": 57.18592869694592}, {"target": "Federal funds rate", "horizon": "1Q", "hsort": 0, "group": "Oil / EPU / infl. exp.", "share": 0.0}, {"target": "Federal funds rate", "horizon": "1y", "hsort": 1, "group": "Real activity", "share": 28.28633281999487}, {"target": "Federal funds rate", "horizon": "1y", "hsort": 1, "group": "Labour & industry", "share": 19.34060548992535}, {"target": "Federal funds rate", "horizon": "1y", "hsort": 1, "group": "Prices", "share": 4.845103330004731}, {"target": "Federal funds rate", "horizon": "1y", "hsort": 1, "group": "Financial", "share": 47.1960740556478}, {"target": "Federal funds rate", "horizon": "1y", "hsort": 1, "group": "Oil / EPU / infl. exp.", "share": 0.33188430442725336}, {"target": "Federal funds rate", "horizon": "2y", "hsort": 2, "group": "Real activity", "share": 30.641293414115953}, {"target": "Federal funds rate", "horizon": "2y", "hsort": 2, "group": "Labour & industry", "share": 23.007919409438536}, {"target": "Federal funds rate", "horizon": "2y", "hsort": 2, "group": "Prices", "share": 5.66067883433322}, {"target": "Federal funds rate", "horizon": "2y", "hsort": 2, "group": "Financial", "share": 40.122627940568655}, {"target": "Federal funds rate", "horizon": "2y", "hsort": 2, "group": "Oil / EPU / infl. exp.", "share": 0.5674804015436359}, {"target": "Federal funds rate", "horizon": "5y", "hsort": 3, "group": "Real activity", "share": 32.43672276062305}, {"target": "Federal funds rate", "horizon": "5y", "hsort": 3, "group": "Labour & industry", "share": 27.47781327971502}, {"target": "Federal funds rate", "horizon": "5y", "hsort": 3, "group": "Prices", "share": 6.565338963351612}, {"target": "Federal funds rate", "horizon": "5y", "hsort": 3, "group": "Financial", "share": 32.42896574350427}, {"target": "Federal funds rate", "horizon": "5y", "hsort": 3, "group": "Oil / EPU / infl. exp.", "share": 1.0911592528060414}, {"target": "Federal funds rate", "horizon": "10y", "hsort": 4, "group": "Real activity", "share": 33.12410032495435}, {"target": "Federal funds rate", "horizon": "10y", "hsort": 4, "group": "Labour & industry", "share": 29.276238095399393}, {"target": "Federal funds rate", "horizon": "10y", "hsort": 4, "group": "Prices", "share": 7.379613660529241}, {"target": "Federal funds rate", "horizon": "10y", "hsort": 4, "group": "Financial", "share": 27.785395309515906}, {"target": "Federal funds rate", "horizon": "10y", "hsort": 4, "group": "Oil / EPU / infl. exp.", "share": 2.4346526096011094}, {"target": "10-year Treasury yield", "horizon": "1Q", "hsort": 0, "group": "Real activity", "share": 20.1213157629916}, {"target": "10-year Treasury yield", "horizon": "1Q", "hsort": 0, "group": "Labour & industry", "share": 26.405660645246613}, {"target": "10-year Treasury yield", "horizon": "1Q", "hsort": 0, "group": "Prices", "share": 6.377404543024799}, {"target": "10-year Treasury yield", "horizon": "1Q", "hsort": 0, "group": "Financial", "share": 47.09561904873699}, {"target": "10-year Treasury yield", "horizon": "1Q", "hsort": 0, "group": "Oil / EPU / infl. exp.", "share": 0.0}, {"target": "10-year Treasury yield", "horizon": "1y", "hsort": 1, "group": "Real activity", "share": 20.837094144625734}, {"target": "10-year Treasury yield", "horizon": "1y", "hsort": 1, "group": "Labour & industry", "share": 25.52310529971809}, {"target": "10-year Treasury yield", "horizon": "1y", "hsort": 1, "group": "Prices", "share": 6.92951002533849}, {"target": "10-year Treasury yield", "horizon": "1y", "hsort": 1, "group": "Financial", "share": 46.428500153607736}, {"target": "10-year Treasury yield", "horizon": "1y", "hsort": 1, "group": "Oil / EPU / infl. exp.", "share": 0.2817903767099527}, {"target": "10-year Treasury yield", "horizon": "2y", "hsort": 2, "group": "Real activity", "share": 21.57687283915645}, {"target": "10-year Treasury yield", "horizon": "2y", "hsort": 2, "group": "Labour & industry", "share": 26.05709028298974}, {"target": "10-year Treasury yield", "horizon": "2y", "hsort": 2, "group": "Prices", "share": 7.252148999278871}, {"target": "10-year Treasury yield", "horizon": "2y", "hsort": 2, "group": "Financial", "share": 44.640475228528004}, {"target": "10-year Treasury yield", "horizon": "2y", "hsort": 2, "group": "Oil / EPU / infl. exp.", "share": 0.4734126500469306}, {"target": "10-year Treasury yield", "horizon": "5y", "hsort": 3, "group": "Real activity", "share": 23.125309368662524}, {"target": "10-year Treasury yield", "horizon": "5y", "hsort": 3, "group": "Labour & industry", "share": 28.150371960148863}, {"target": "10-year Treasury yield", "horizon": "5y", "hsort": 3, "group": "Prices", "share": 7.688152533344039}, {"target": "10-year Treasury yield", "horizon": "5y", "hsort": 3, "group": "Financial", "share": 40.15785168990457}, {"target": "10-year Treasury yield", "horizon": "5y", "hsort": 3, "group": "Oil / EPU / infl. exp.", "share": 0.8783144479400146}, {"target": "10-year Treasury yield", "horizon": "10y", "hsort": 4, "group": "Real activity", "share": 26.067035280151952}, {"target": "10-year Treasury yield", "horizon": "10y", "hsort": 4, "group": "Labour & industry", "share": 29.271376167191228}, {"target": "10-year Treasury yield", "horizon": "10y", "hsort": 4, "group": "Prices", "share": 7.941919159934503}, {"target": "10-year Treasury yield", "horizon": "10y", "hsort": 4, "group": "Financial", "share": 34.58605272075139}, {"target": "10-year Treasury yield", "horizon": "10y", "hsort": 4, "group": "Oil / EPU / infl. exp.", "share": 2.1336166719709335}]}}, {"actions": false, "renderer": "svg"});</script></div>
-    <div class="explain"><b>How to read this.</b> Each bar splits the
-    <i>uncertainty</i> in a variable's forecast into the share coming from each
-    family of shocks. A tall navy segment for GDP, for example, means most of the
-    uncertainty about future GDP comes from real-activity shocks rather than from
-    prices or financial conditions. Near term, a variable's own shocks dominate;
-    further out, other blocks contribute more as the dynamics propagate. The split
-    uses a recursive (Cholesky) ordering, so the <i>exact</i> shares depend on that
-    ordering &mdash; but the broad ranking (which shocks matter most) is generally
-    robust.</div>
-  </div></div><div class="exp-pane hidden" data-group="fevd" data-pane="named">
-  <div class="irf-block">
-    <h3>By named shock &mdash; sign restrictions</h3>
-    <div class="note">The same uncertainty split, but by <b>named economic shock</b>: twelve shocks identified by sign and ranking restrictions (Demand, Investment, Financial, Monetary, Gov Spending, Oil Supply, Housing/Credit, Uncertainty, Technology, Labour Supply, Wage Bargaining, Tax), pooled here into blocks &mdash; including the combined <b>Financial+Uncertainty</b> family where both are named (the split <i>within</i> that family is softer than the family total, which is the robust object) &mdash; plus an exact <b>Unidentified</b> remainder. Mean shares across 250 accepted identifications. Identified by the RZ-SMC engine under the <b>conditionally-uniform</b> estimand: every posterior draw that admits the scheme carries equal weight (a declared prior choice; Uhlig 2017). Hover for shares.</div>
-    <div class="panel"><div id="fevd_named" class="vega-chart"></div>
-<script>vegaEmbed("#fevd_named", {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}, "background": "#ffffff"}, "data": {"name": "data-5d0270ec90e491bfeeb4d2dc2f5e8ef1"}, "facet": {"field": "target", "header": {"labelColor": "#16181c", "labelFont": "IBM Plex Sans", "labelFontSize": 11.5, "labelFontWeight": 600}, "sort": ["Real GDP growth", "PCE inflation", "Unemployment rate", "Federal funds rate", "10-year Treasury yield"], "title": null, "type": "nominal"}, "spec": {"mark": {"type": "bar", "stroke": "white", "strokeWidth": 0.5}, "encoding": {"color": {"field": "group", "scale": {"domain": ["Demand-type", "Financial+Uncertainty", "Supply-type", "Fiscal (Tax)", "Monetary policy", "Unidentified"], "range": ["#003366", "#1f9aa4", "#1f7a4d", "#8a6d3b", "#e3120b", "#c7c6bf"]}, "sort": ["Demand-type", "Financial+Uncertainty", "Supply-type", "Fiscal (Tax)", "Monetary policy", "Unidentified"], "title": "Shock block", "type": "nominal"}, "order": {"field": "group", "sort": "ascending", "type": "nominal"}, "tooltip": [{"field": "target", "title": "Variable", "type": "nominal"}, {"field": "horizon", "title": "Horizon", "type": "nominal"}, {"field": "group", "title": "Shock block", "type": "nominal"}, {"field": "share", "format": ".0f", "title": "Share", "type": "quantitative"}], "x": {"axis": {"labelAngle": 0}, "field": "horizon", "sort": ["1Q", "1y", "2y", "5y", "10y"], "title": null, "type": "nominal"}, "y": {"field": "share", "scale": {"domain": [0, 100]}, "stack": "zero", "title": "% of variance", "type": "quantitative"}}, "height": 180, "width": 150}, "columns": 3, "$schema": "https://vega.github.io/schema/vega-lite/v6.4.1.json", "datasets": {"data-5d0270ec90e491bfeeb4d2dc2f5e8ef1": [{"target": "Real GDP growth", "horizon": "1Q", "group": "Demand-type", "share": 10.675246238708496}, {"target": "Real GDP growth", "horizon": "1Q", "group": "Financial+Uncertainty", "share": 8.138256072998047}, {"target": "Real GDP growth", "horizon": "1Q", "group": "Supply-type", "share": 17.603784561157227}, {"target": "Real GDP growth", "horizon": "1Q", "group": "Fiscal (Tax)", "share": 1.9252021312713623}, {"target": "Real GDP growth", "horizon": "1Q", "group": "Monetary policy", "share": 3.2173144817352295}, {"target": "Real GDP growth", "horizon": "1Q", "group": "Unidentified", "share": 58.4401969909668}, {"target": "Real GDP growth", "horizon": "1y", "group": "Demand-type", "share": 11.205299377441406}, {"target": "Real GDP growth", "horizon": "1y", "group": "Financial+Uncertainty", "share": 9.348654747009277}, {"target": "Real GDP growth", "horizon": "1y", "group": "Supply-type", "share": 16.124418258666992}, {"target": "Real GDP growth", "horizon": "1y", "group": "Fiscal (Tax)", "share": 2.2074356079101562}, {"target": "Real GDP growth", "horizon": "1y", "group": "Monetary policy", "share": 4.211698055267334}, {"target": "Real GDP growth", "horizon": "1y", "group": "Unidentified", "share": 56.902496337890625}, {"target": "Real GDP growth", "horizon": "2y", "group": "Demand-type", "share": 11.466931343078613}, {"target": "Real GDP growth", "horizon": "2y", "group": "Financial+Uncertainty", "share": 9.372858047485352}, {"target": "Real GDP growth", "horizon": "2y", "group": "Supply-type", "share": 15.651226997375488}, {"target": "Real GDP growth", "horizon": "2y", "group": "Fiscal (Tax)", "share": 2.43650484085083}, {"target": "Real GDP growth", "horizon": "2y", "group": "Monetary policy", "share": 4.102528095245361}, {"target": "Real GDP growth", "horizon": "2y", "group": "Unidentified", "share": 56.969947814941406}, {"target": "Real GDP growth", "horizon": "5y", "group": "Demand-type", "share": 11.276114463806152}, {"target": "Real GDP growth", "horizon": "5y", "group": "Financial+Uncertainty", "share": 7.623569011688232}, {"target": "Real GDP growth", "horizon": "5y", "group": "Supply-type", "share": 14.2695951461792}, {"target": "Real GDP growth", "horizon": "5y", "group": "Fiscal (Tax)", "share": 2.547229528427124}, {"target": "Real GDP growth", "horizon": "5y", "group": "Monetary policy", "share": 4.242836952209473}, {"target": "Real GDP growth", "horizon": "5y", "group": "Unidentified", "share": 60.04065704345703}, {"target": "Real GDP growth", "horizon": "10y", "group": "Demand-type", "share": 11.519661903381348}, {"target": "Real GDP growth", "horizon": "10y", "group": "Financial+Uncertainty", "share": 6.083362102508545}, {"target": "Real GDP growth", "horizon": "10y", "group": "Supply-type", "share": 12.795501708984375}, {"target": "Real GDP growth", "horizon": "10y", "group": "Fiscal (Tax)", "share": 2.6658682823181152}, {"target": "Real GDP growth", "horizon": "10y", "group": "Monetary policy", "share": 3.9062561988830566}, {"target": "Real GDP growth", "horizon": "10y", "group": "Unidentified", "share": 63.02934265136719}, {"target": "PCE inflation", "horizon": "1Q", "group": "Demand-type", "share": 16.675214767456055}, {"target": "PCE inflation", "horizon": "1Q", "group": "Financial+Uncertainty", "share": 8.169252395629883}, {"target": "PCE inflation", "horizon": "1Q", "group": "Supply-type", "share": 18.303531646728516}, {"target": "PCE inflation", "horizon": "1Q", "group": "Fiscal (Tax)", "share": 3.5316176414489746}, {"target": "PCE inflation", "horizon": "1Q", "group": "Monetary policy", "share": 2.9403929710388184}, {"target": "PCE inflation", "horizon": "1Q", "group": "Unidentified", "share": 50.37998962402344}, {"target": "PCE inflation", "horizon": "1y", "group": "Demand-type", "share": 18.7670841217041}, {"target": "PCE inflation", "horizon": "1y", "group": "Financial+Uncertainty", "share": 10.171666145324707}, {"target": "PCE inflation", "horizon": "1y", "group": "Supply-type", "share": 16.786531448364258}, {"target": "PCE inflation", "horizon": "1y", "group": "Fiscal (Tax)", "share": 3.7702269554138184}, {"target": "PCE inflation", "horizon": "1y", "group": "Monetary policy", "share": 3.973850965499878}, {"target": "PCE inflation", "horizon": "1y", "group": "Unidentified", "share": 46.5306396484375}, {"target": "PCE inflation", "horizon": "2y", "group": "Demand-type", "share": 18.74032211303711}, {"target": "PCE inflation", "horizon": "2y", "group": "Financial+Uncertainty", "share": 10.80941104888916}, {"target": "PCE inflation", "horizon": "2y", "group": "Supply-type", "share": 15.871909141540527}, {"target": "PCE inflation", "horizon": "2y", "group": "Fiscal (Tax)", "share": 3.8790948390960693}, {"target": "PCE inflation", "horizon": "2y", "group": "Monetary policy", "share": 4.2225728034973145}, {"target": "PCE inflation", "horizon": "2y", "group": "Unidentified", "share": 46.47669219970703}, {"target": "PCE inflation", "horizon": "5y", "group": "Demand-type", "share": 17.436351776123047}, {"target": "PCE inflation", "horizon": "5y", "group": "Financial+Uncertainty", "share": 9.91242790222168}, {"target": "PCE inflation", "horizon": "5y", "group": "Supply-type", "share": 14.792506217956543}, {"target": "PCE inflation", "horizon": "5y", "group": "Fiscal (Tax)", "share": 4.165028095245361}, {"target": "PCE inflation", "horizon": "5y", "group": "Monetary policy", "share": 3.218705892562866}, {"target": "PCE inflation", "horizon": "5y", "group": "Unidentified", "share": 50.4749755859375}, {"target": "PCE inflation", "horizon": "10y", "group": "Demand-type", "share": 14.991337776184082}, {"target": "PCE inflation", "horizon": "10y", "group": "Financial+Uncertainty", "share": 8.411747932434082}, {"target": "PCE inflation", "horizon": "10y", "group": "Supply-type", "share": 13.60901165008545}, {"target": "PCE inflation", "horizon": "10y", "group": "Fiscal (Tax)", "share": 4.037482261657715}, {"target": "PCE inflation", "horizon": "10y", "group": "Monetary policy", "share": 2.90675950050354}, {"target": "PCE inflation", "horizon": "10y", "group": "Unidentified", "share": 56.04365921020508}, {"target": "Unemployment rate", "horizon": "1Q", "group": "Demand-type", "share": 13.905221939086914}, {"target": "Unemployment rate", "horizon": "1Q", "group": "Financial+Uncertainty", "share": 6.9682841300964355}, {"target": "Unemployment rate", "horizon": "1Q", "group": "Supply-type", "share": 12.660874366760254}, {"target": "Unemployment rate", "horizon": "1Q", "group": "Fiscal (Tax)", "share": 3.3529646396636963}, {"target": "Unemployment rate", "horizon": "1Q", "group": "Monetary policy", "share": 4.673891067504883}, {"target": "Unemployment rate", "horizon": "1Q", "group": "Unidentified", "share": 58.43876647949219}, {"target": "Unemployment rate", "horizon": "1y", "group": "Demand-type", "share": 15.75869369506836}, {"target": "Unemployment rate", "horizon": "1y", "group": "Financial+Uncertainty", "share": 9.936919212341309}, {"target": "Unemployment rate", "horizon": "1y", "group": "Supply-type", "share": 11.513280868530273}, {"target": "Unemployment rate", "horizon": "1y", "group": "Fiscal (Tax)", "share": 3.5899531841278076}, {"target": "Unemployment rate", "horizon": "1y", "group": "Monetary policy", "share": 5.086705684661865}, {"target": "Unemployment rate", "horizon": "1y", "group": "Unidentified", "share": 54.114444732666016}, {"target": "Unemployment rate", "horizon": "2y", "group": "Demand-type", "share": 14.389838218688965}, {"target": "Unemployment rate", "horizon": "2y", "group": "Financial+Uncertainty", "share": 9.78709602355957}, {"target": "Unemployment rate", "horizon": "2y", "group": "Supply-type", "share": 12.089729309082031}, {"target": "Unemployment rate", "horizon": "2y", "group": "Fiscal (Tax)", "share": 3.3907761573791504}, {"target": "Unemployment rate", "horizon": "2y", "group": "Monetary policy", "share": 4.409367084503174}, {"target": "Unemployment rate", "horizon": "2y", "group": "Unidentified", "share": 55.93319320678711}, {"target": "Unemployment rate", "horizon": "5y", "group": "Demand-type", "share": 12.306632995605469}, {"target": "Unemployment rate", "horizon": "5y", "group": "Financial+Uncertainty", "share": 7.663992881774902}, {"target": "Unemployment rate", "horizon": "5y", "group": "Supply-type", "share": 13.366165161132812}, {"target": "Unemployment rate", "horizon": "5y", "group": "Fiscal (Tax)", "share": 3.076390027999878}, {"target": "Unemployment rate", "horizon": "5y", "group": "Monetary policy", "share": 3.9251675605773926}, {"target": "Unemployment rate", "horizon": "5y", "group": "Unidentified", "share": 59.661651611328125}, {"target": "Unemployment rate", "horizon": "10y", "group": "Demand-type", "share": 11.255060195922852}, {"target": "Unemployment rate", "horizon": "10y", "group": "Financial+Uncertainty", "share": 6.123340129852295}, {"target": "Unemployment rate", "horizon": "10y", "group": "Supply-type", "share": 13.821507453918457}, {"target": "Unemployment rate", "horizon": "10y", "group": "Fiscal (Tax)", "share": 3.094339370727539}, {"target": "Unemployment rate", "horizon": "10y", "group": "Monetary policy", "share": 3.7527761459350586}, {"target": "Unemployment rate", "horizon": "10y", "group": "Unidentified", "share": 61.95297622680664}, {"target": "Federal funds rate", "horizon": "1Q", "group": "Demand-type", "share": 11.512324333190918}, {"target": "Federal funds rate", "horizon": "1Q", "group": "Financial+Uncertainty", "share": 6.202154159545898}, {"target": "Federal funds rate", "horizon": "1Q", "group": "Supply-type", "share": 11.923500061035156}, {"target": "Federal funds rate", "horizon": "1Q", "group": "Fiscal (Tax)", "share": 3.437422275543213}, {"target": "Federal funds rate", "horizon": "1Q", "group": "Monetary policy", "share": 4.250279426574707}, {"target": "Federal funds rate", "horizon": "1Q", "group": "Unidentified", "share": 62.67431640625}, {"target": "Federal funds rate", "horizon": "1y", "group": "Demand-type", "share": 13.594223022460938}, {"target": "Federal funds rate", "horizon": "1y", "group": "Financial+Uncertainty", "share": 7.38496732711792}, {"target": "Federal funds rate", "horizon": "1y", "group": "Supply-type", "share": 11.57043743133545}, {"target": "Federal funds rate", "horizon": "1y", "group": "Fiscal (Tax)", "share": 3.871170997619629}, {"target": "Federal funds rate", "horizon": "1y", "group": "Monetary policy", "share": 3.9000966548919678}, {"target": "Federal funds rate", "horizon": "1y", "group": "Unidentified", "share": 59.679100036621094}, {"target": "Federal funds rate", "horizon": "2y", "group": "Demand-type", "share": 14.327873229980469}, {"target": "Federal funds rate", "horizon": "2y", "group": "Financial+Uncertainty", "share": 7.93691349029541}, {"target": "Federal funds rate", "horizon": "2y", "group": "Supply-type", "share": 11.738985061645508}, {"target": "Federal funds rate", "horizon": "2y", "group": "Fiscal (Tax)", "share": 3.807312488555908}, {"target": "Federal funds rate", "horizon": "2y", "group": "Monetary policy", "share": 3.1573057174682617}, {"target": "Federal funds rate", "horizon": "2y", "group": "Unidentified", "share": 59.03160858154297}, {"target": "Federal funds rate", "horizon": "5y", "group": "Demand-type", "share": 14.17161750793457}, {"target": "Federal funds rate", "horizon": "5y", "group": "Financial+Uncertainty", "share": 8.179280281066895}, {"target": "Federal funds rate", "horizon": "5y", "group": "Supply-type", "share": 11.975826263427734}, {"target": "Federal funds rate", "horizon": "5y", "group": "Fiscal (Tax)", "share": 3.742523193359375}, {"target": "Federal funds rate", "horizon": "5y", "group": "Monetary policy", "share": 2.7822532653808594}, {"target": "Federal funds rate", "horizon": "5y", "group": "Unidentified", "share": 59.14849853515625}, {"target": "Federal funds rate", "horizon": "10y", "group": "Demand-type", "share": 13.021478652954102}, {"target": "Federal funds rate", "horizon": "10y", "group": "Financial+Uncertainty", "share": 7.167500972747803}, {"target": "Federal funds rate", "horizon": "10y", "group": "Supply-type", "share": 12.058401107788086}, {"target": "Federal funds rate", "horizon": "10y", "group": "Fiscal (Tax)", "share": 3.4701783657073975}, {"target": "Federal funds rate", "horizon": "10y", "group": "Monetary policy", "share": 2.8044590950012207}, {"target": "Federal funds rate", "horizon": "10y", "group": "Unidentified", "share": 61.47798156738281}, {"target": "10-year Treasury yield", "horizon": "1Q", "group": "Demand-type", "share": 16.32697105407715}, {"target": "10-year Treasury yield", "horizon": "1Q", "group": "Financial+Uncertainty", "share": 7.086664199829102}, {"target": "10-year Treasury yield", "horizon": "1Q", "group": "Supply-type", "share": 12.108551025390625}, {"target": "10-year Treasury yield", "horizon": "1Q", "group": "Fiscal (Tax)", "share": 3.8406264781951904}, {"target": "10-year Treasury yield", "horizon": "1Q", "group": "Monetary policy", "share": 2.611264228820801}, {"target": "10-year Treasury yield", "horizon": "1Q", "group": "Unidentified", "share": 58.02592086791992}, {"target": "10-year Treasury yield", "horizon": "1y", "group": "Demand-type", "share": 16.126113891601562}, {"target": "10-year Treasury yield", "horizon": "1y", "group": "Financial+Uncertainty", "share": 7.205376148223877}, {"target": "10-year Treasury yield", "horizon": "1y", "group": "Supply-type", "share": 12.480707168579102}, {"target": "10-year Treasury yield", "horizon": "1y", "group": "Fiscal (Tax)", "share": 3.9434213638305664}, {"target": "10-year Treasury yield", "horizon": "1y", "group": "Monetary policy", "share": 2.2460193634033203}, {"target": "10-year Treasury yield", "horizon": "1y", "group": "Unidentified", "share": 57.99835968017578}, {"target": "10-year Treasury yield", "horizon": "2y", "group": "Demand-type", "share": 15.839929580688477}, {"target": "10-year Treasury yield", "horizon": "2y", "group": "Financial+Uncertainty", "share": 7.061406135559082}, {"target": "10-year Treasury yield", "horizon": "2y", "group": "Supply-type", "share": 12.701064109802246}, {"target": "10-year Treasury yield", "horizon": "2y", "group": "Fiscal (Tax)", "share": 3.9845383167266846}, {"target": "10-year Treasury yield", "horizon": "2y", "group": "Monetary policy", "share": 2.24708890914917}, {"target": "10-year Treasury yield", "horizon": "2y", "group": "Unidentified", "share": 58.16597366333008}, {"target": "10-year Treasury yield", "horizon": "5y", "group": "Demand-type", "share": 15.328091621398926}, {"target": "10-year Treasury yield", "horizon": "5y", "group": "Financial+Uncertainty", "share": 7.0367841720581055}, {"target": "10-year Treasury yield", "horizon": "5y", "group": "Supply-type", "share": 12.789796829223633}, {"target": "10-year Treasury yield", "horizon": "5y", "group": "Fiscal (Tax)", "share": 3.9042162895202637}, {"target": "10-year Treasury yield", "horizon": "5y", "group": "Monetary policy", "share": 2.2409398555755615}, {"target": "10-year Treasury yield", "horizon": "5y", "group": "Unidentified", "share": 58.700172424316406}, {"target": "10-year Treasury yield", "horizon": "10y", "group": "Demand-type", "share": 13.719286918640137}, {"target": "10-year Treasury yield", "horizon": "10y", "group": "Financial+Uncertainty", "share": 6.5409464836120605}, {"target": "10-year Treasury yield", "horizon": "10y", "group": "Supply-type", "share": 13.182636260986328}, {"target": "10-year Treasury yield", "horizon": "10y", "group": "Fiscal (Tax)", "share": 3.5934863090515137}, {"target": "10-year Treasury yield", "horizon": "10y", "group": "Monetary policy", "share": 2.480950355529785}, {"target": "10-year Treasury yield", "horizon": "10y", "group": "Unidentified", "share": 60.48269271850586}]}}, {"actions": false, "renderer": "svg"});</script></div>
-    <div class="explain"><b>Why this is here.</b> The variable-group tab asks
-    &ldquo;which <i>variable&rsquo;s</i> surprises matter&rdquo;; this tab asks
-    &ldquo;which <i>economic story</i> do they belong to&rdquo; &mdash; the
-    demand-type family, the supply-type family, or monetary policy.
-    <b>Reading the grey band.</b> With this identification method, naming
-    12 of the model&rsquo;s 32 shocks implies a
-    &sim;62% expected &ldquo;Unidentified&rdquo; share
-    <i>before any data are consulted</i> (as a rule of thumb for set
-    identification, not a defect); the measured grey for GDP at 5 years is
-    60%, to be read against that &sim;62%
-    baseline rather than against zero. The block sums shown here are the
-    robust objects &mdash; they do not depend on how the method rotates shocks
-    <i>within</i> a block. And the grey pool is not mysterious: a single
-    statistically-extracted &ldquo;main business-cycle&rdquo; shock accounts
-    for a median 89% of unemployment&rsquo;s business-cycle variance
-    on its own, and 54% even after removing everything the
-    twelve named shocks explain &mdash; the unnamed variance is
-    concentrated, not diffuse, but naming its economic cause would require
-    assumptions this dashboard does not impose (see
-    docs/structural_tools.md).</div>
-  </div></div>
-  </div>
 
   <div class="section">
     <h2 id="what-drove-the-economy-shock-decomposition">What drove the economy &mdash; shock decomposition</h2>
