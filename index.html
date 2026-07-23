@@ -343,7 +343,7 @@ a{color:var(--navy);}
 <header class="app">
   <div class="masthead">
     <h1>US Macro Forecast</h1>
-    <div class="status">Vintage <b>2026-07</b> &nbsp;&middot;&nbsp; Data to <b>2026Q1</b> &nbsp;&middot;&nbsp; Updated <b>2026-07-23 19:58 UTC</b></div>
+    <div class="status">Vintage <b>2026-07</b> &nbsp;&middot;&nbsp; Data to <b>2026Q1</b> &nbsp;&middot;&nbsp; Updated <b>2026-07-23 20:26 UTC</b></div>
   </div>
 </header>
 <div class="wrap">
@@ -503,39 +503,51 @@ a{color:var(--navy);}
   
   <div class="section">
     <h2 id="track-record">Track record</h2>
-    <div class="note">These are the model's forecasts (the immediately preceding 28-variable production model, which forecasts to the same accuracy as the current one), made in real time and
-    scored out of sample. At each quarter from 2005 to 2024 the model saw only
-    the data actually published by that date (from the ALFRED point-in-time
-    archive), was re-estimated, and forecast forward with no external anchoring;
-    the forecasts are then scored against what the economy turned out to do. The
-    table sets that record against three yardsticks: a random walk (the naive
-    "no-change" forecast), the Survey of Professional Forecasters (SPF, the
-    quarterly consensus of independent economists), and the Federal Reserve
-    staff's own Greenbook forecasts (the in-house benchmark of the
-    forecast-evaluation literature, released with a five-year lag). Each figure
-    is the model's mean absolute error divided by that benchmark's, on identical
-    dates and targets: below 1.00 the model was more accurate, above 1.00 the
-    benchmark was. h=4 is one year ahead, h=8 two years. The one-quarter horizon
-    is left out on purpose: this model reads only completed quarters, so at that
-    range the survey and the Fed staff hold one to two months of data on the
-    current quarter that the model has not seen. A like-for-like nowcast
-    comparison is future work; the current-quarter nowcast above is the in-house
-    answer to that horizon.</div>
+    <div class="note">Real-time, out-of-sample forecasts, scored against
+    what the economy turned out to do. At each quarter the models saw only the
+    data actually published by that date (from the ALFRED point-in-time
+    archive), were re-estimated, and forecast forward with no external
+    anchoring. The first three columns come from one internally consistent
+    record &mdash; 77 quarterly origins, 2006&ndash;2025, both priors and a
+    random walk estimated on identical data and scored against the same
+    frozen final values &mdash; so the <b>Model baseline</b> and the
+    <b>Theory-anchored</b> forecast are directly comparable to each other and
+    to the naive "no-change" benchmark, out to five years. The last two
+    columns score the baseline against the Survey of Professional Forecasters
+    (the quarterly consensus of independent economists) and the Federal
+    Reserve staff's own Greenbook forecasts (released with a five-year lag);
+    those comparisons are baseline-only because the survey archives score
+    point forecasts under each survey's own target definitions, and the
+    theory-anchored paths have not yet been run through that machinery. Each
+    figure is mean absolute error divided by the benchmark's on identical
+    dates and targets: below 1.00 the first-named forecast was more accurate.
+    The one-quarter horizon is left out on purpose: the models read only
+    completed quarters, so at that range the survey and the Fed staff hold
+    monthly data the models have not seen; the current-quarter nowcast above
+    is the in-house answer to that horizon.</div>
     <div class="tcap">Forecast accuracy &mdash; model error relative to each benchmark</div>
-    <table class='ftable'><thead><tr><th class='lcol'>Variable</th><th class='lcol'>Horizon</th><th>vs random walk</th><th>vs SPF median</th><th>vs Fed staff</th></tr></thead><tbody><tr class='grouprow'><td class='lcol'>Real GDP</td><td class='lcol'>1 year</td><td class='fc win'>0.57&times;</td><td class='fc '>1.12&times;<span class='band'>par</span></td><td class='fc '>1.26&times;</td></tr><tr><td class='lcol'></td><td class='lcol'>2 years</td><td class='fc win'>0.50&times;</td><td class='fc'>&middot;</td><td class='fc '>1.04&times;<span class='band'>par</span></td></tr><tr class='grouprow'><td class='lcol'>CPI</td><td class='lcol'>1 year</td><td class='fc win'>0.51&times;</td><td class='fc '>1.20&times;</td><td class='fc '>1.17&times;<span class='band'>par</span></td></tr><tr><td class='lcol'></td><td class='lcol'>2 years</td><td class='fc win'>0.47&times;</td><td class='fc'>&middot;</td><td class='fc '>1.15&times;<span class='band'>par</span></td></tr><tr class='grouprow'><td class='lcol'>Unemployment</td><td class='lcol'>1 year</td><td class='fc win'>0.90&times;<span class='band'>par</span></td><td class='fc '>1.45&times;</td><td class='fc '>1.03&times;<span class='band'>par</span></td></tr><tr><td class='lcol'></td><td class='lcol'>2 years</td><td class='fc win'>0.87&times;</td><td class='fc'>&middot;</td><td class='fc '>1.16&times;<span class='band'>par</span></td></tr></tbody></table>
+    <table class='ftable'><thead><tr><th class='lcol'>Variable</th><th class='lcol'>Horizon</th><th>Baseline vs random walk</th><th>Theory-anchored vs random walk</th><th>Theory-anchored vs baseline</th><th>Baseline vs SPF median</th><th>Baseline vs Fed staff</th></tr></thead><tbody><tr class='grouprow'><td class='lcol'>Real GDP</td><td class='lcol'>1 year</td><td class='fc win'>0.63&times;</td><td class='fc win'>0.62&times;</td><td class='fc win'>0.98&times;<span class='band'>par</span></td><td class='fc '>1.12&times;<span class='band'>par</span></td><td class='fc '>1.26&times;</td></tr><tr><td class='lcol'></td><td class='lcol'>2 years</td><td class='fc win'>0.57&times;<span class='band'>par</span></td><td class='fc win'>0.55&times;<span class='band'>par</span></td><td class='fc win'>0.97&times;<span class='band'>par</span></td><td class='fc'>&middot;</td><td class='fc '>1.04&times;<span class='band'>par</span></td></tr><tr><td class='lcol'></td><td class='lcol'>5 years</td><td class='fc win'>0.40&times;<span class='band'>par</span></td><td class='fc win'>0.38&times;<span class='band'>par</span></td><td class='fc win'>0.96&times;</td><td class='fc'>&middot;</td><td class='fc'>&middot;</td></tr><tr class='grouprow'><td class='lcol'>CPI</td><td class='lcol'>1 year</td><td class='fc win'>0.51&times;</td><td class='fc win'>0.58&times;</td><td class='fc '>1.12&times;<span class='band'>par</span></td><td class='fc '>1.20&times;</td><td class='fc '>1.17&times;<span class='band'>par</span></td></tr><tr><td class='lcol'></td><td class='lcol'>2 years</td><td class='fc win'>0.48&times;</td><td class='fc win'>0.54&times;</td><td class='fc '>1.12&times;<span class='band'>par</span></td><td class='fc'>&middot;</td><td class='fc '>1.15&times;<span class='band'>par</span></td></tr><tr><td class='lcol'></td><td class='lcol'>5 years</td><td class='fc win'>0.43&times;</td><td class='fc win'>0.51&times;</td><td class='fc '>1.21&times;<span class='band'>par</span></td><td class='fc'>&middot;</td><td class='fc'>&middot;</td></tr><tr class='grouprow'><td class='lcol'>Unemployment</td><td class='lcol'>1 year</td><td class='fc win'>0.90&times;<span class='band'>par</span></td><td class='fc win'>0.87&times;<span class='band'>par</span></td><td class='fc win'>0.97&times;<span class='band'>par</span></td><td class='fc '>1.45&times;</td><td class='fc '>1.03&times;<span class='band'>par</span></td></tr><tr><td class='lcol'></td><td class='lcol'>2 years</td><td class='fc win'>0.91&times;<span class='band'>par</span></td><td class='fc win'>0.84&times;<span class='band'>par</span></td><td class='fc win'>0.92&times;</td><td class='fc'>&middot;</td><td class='fc '>1.16&times;<span class='band'>par</span></td></tr><tr><td class='lcol'></td><td class='lcol'>5 years</td><td class='fc '>1.11&times;</td><td class='fc win'>0.99&times;</td><td class='fc win'>0.90&times;</td><td class='fc'>&middot;</td><td class='fc'>&middot;</td></tr></tbody></table>
     <div class="note">"par" marks a cell where the difference is not
     statistically distinguishable from zero at the 5% level (Diebold-Mariano
-    test, the standard test of equal forecast accuracy). The model beats the
-    random walk decisively on activity and prices at every horizon; on
-    unemployment it only edges the random walk, and at one year the gap is not
-    statistically significant. Against the
-    professionals the pattern is the familiar one: their edge is largest close
-    in and narrows with horizon. One year out the model already matches the SPF
-    on GDP, and by two years it is at par with the Fed staff on all three
-    variables. Windows differ by benchmark: the random-walk comparison spans
-    78 real-time quarters (2005&ndash;2024, Covid included) and the SPF
-    comparison 78; the Greenbook comparison is ex-Covid and ends in 2020 at
-    the archive's release frontier (58 quarters at one year, 27 at
+    test, the standard test of equal forecast accuracy); at the five-year
+    horizon too few independent episodes exist for that test, so read those
+    rows as directional. The baseline beats the random walk on activity and
+    prices at every horizon; against the professionals their edge is largest
+    close in and narrows with horizon. The <b>theory-anchored column</b>
+    carries the July 2026 race verdict: it slightly improves real-activity
+    forecasts and dramatically tames the explosive long-horizon uncertainty
+    bands the baseline occasionally produces (at two-to-five-year horizons
+    the baseline's bands blow up at roughly one origin in four&ndash;eight;
+    the theory prior's almost never do), but its one-year CPI forecasts are
+    significantly worse under the race&rsquo;s decision rule, which scored
+    squared errors and full predictive densities (on this table&rsquo;s
+    absolute-error metric the same CPI gap reads as borderline &mdash;
+    the point forecasts differ by ~12% while the densities differ more)
+    &mdash; the pre-registered rule therefore kept the baseline as the
+    default and the theory prior as the published alternative. Windows differ by benchmark: the race record spans 77
+    real-time quarters (2006&ndash;2025, Covid included), the SPF comparison
+    78; the Greenbook comparison is ex-Covid and ends in 2020 at the
+    archive's release frontier (58 quarters at one year, 27 at
     two).</div>
     <div class="tcap gap-top">Calibration &mdash; 90% band coverage (real-time)</div>
     <table class='ftable'><thead><tr><th class='lcol'>Variable</th><th>1 year (h=4)</th><th>2 years (h=8)</th></tr></thead><tbody><tr><td class='lcol'>Real GDP</td><td class='fc'>87%</td><td class='fc'>86%</td></tr><tr><td class='lcol'>CPI</td><td class='fc'>82%</td><td class='fc'>84%</td></tr><tr><td class='lcol'>Unemployment</td><td class='fc'>78%</td><td class='fc'>82%</td></tr></tbody></table>
@@ -544,7 +556,6 @@ a{color:var(--navy);}
     right; well below means the bands were too narrow. The point-forecast
     benchmarks above carry no comparable bands, so this is the model's own
     record.</div>
-    <div class="tcap gap-top">The two priors, raced &mdash; baseline vs theory-anchored (real time)</div><details class="anchor-detail"><summary>How to read this chart</summary><div class="explain">A pre-registered, real-time race between the two priors on 77 forecast origins (2006&ndash;2025): same data at every origin, same engine, scored against frozen final values, with a decision rule fixed before any results were seen. First column: the theory-anchored forecast&rsquo;s mean absolute error divided by the baseline&rsquo;s &mdash; below 1.00 the theory prior helped, above 1.00 it hurt; &ldquo;sig.&rdquo; marks differences that survive a family-wise significance test built for many simultaneous comparisons. Second column: the share of origins where each forecast&rsquo;s uncertainty bands became explosively wide &mdash; a long-horizon failure the theory prior almost eliminates. The verdict under the rule: the theory prior was NOT promoted to default &mdash; its one-year CPI forecasts are significantly worse (about 12%) &mdash; and it remains published as the parallel long-run-discipline object, whose better-behaved long-horizon densities and small real-activity edge are visible in the table.</div></details><table class='ftable'><thead><tr><th class='lcol'>Variable</th><th class='lcol'>Horizon</th><th>Theory-anchored error &divide; baseline error</th><th>Explosive-density share (baseline / theory)</th></tr></thead><tbody><tr class='grouprow'><td class='lcol'>GDP</td><td class='lcol'>1 year</td><td class='fc'>0.98</td><td class='fc'>0% / 0%</td></tr><tr><td class='lcol'></td><td class='lcol'>2 years</td><td class='fc'>0.97</td><td class='fc'>14% / 0%</td></tr><tr><td class='lcol'></td><td class='lcol'>5 years</td><td class='fc'>0.96</td><td class='fc'>25% / 0%</td></tr><tr class='grouprow'><td class='lcol'>CPI-U</td><td class='lcol'>1 year</td><td class='fc'>1.12 <span class='band'>sig. worse</span></td><td class='fc'>0% / 0%</td></tr><tr><td class='lcol'></td><td class='lcol'>2 years</td><td class='fc'>1.12</td><td class='fc'>12% / 0%</td></tr><tr><td class='lcol'></td><td class='lcol'>5 years</td><td class='fc'>1.21</td><td class='fc'>25% / 0%</td></tr><tr class='grouprow'><td class='lcol'>Unemployment Rate</td><td class='lcol'>1 year</td><td class='fc'>0.97</td><td class='fc'>0% / 0%</td></tr><tr><td class='lcol'></td><td class='lcol'>2 years</td><td class='fc'>0.92</td><td class='fc'>12% / 0%</td></tr><tr><td class='lcol'></td><td class='lcol'>5 years</td><td class='fc'>0.90</td><td class='fc'>25% / 0%</td></tr><tr class='grouprow'><td class='lcol'>Fed Funds Rate</td><td class='lcol'>1 year</td><td class='fc'>0.97</td><td class='fc'>0% / 0%</td></tr><tr><td class='lcol'></td><td class='lcol'>2 years</td><td class='fc'>1.00</td><td class='fc'>12% / 0%</td></tr><tr><td class='lcol'></td><td class='lcol'>5 years</td><td class='fc'>1.08</td><td class='fc'>25% / 0%</td></tr><tr class='grouprow'><td class='lcol'>TR10y Rate</td><td class='lcol'>1 year</td><td class='fc'>0.97</td><td class='fc'>0% / 0%</td></tr><tr><td class='lcol'></td><td class='lcol'>2 years</td><td class='fc'>1.06</td><td class='fc'>14% / 0%</td></tr><tr><td class='lcol'></td><td class='lcol'>5 years</td><td class='fc'>1.27</td><td class='fc'>25% / 0%</td></tr></tbody></table>
   </div>
 
   
