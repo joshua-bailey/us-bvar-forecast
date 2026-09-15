@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>US macro forecast</title>
+<style>
+  :root{--bg:#FDFCFA;--card:#fff;--ink:#443d33;--dim:#6d6459;--line:#e6e0d6;--accent:#1F5FA6;--err:#CC5B2E}
+  @media (prefers-color-scheme: dark){
+    :root{--bg:#1B1917;--card:#232019;--ink:#EDE7DD;--dim:#b3aa9c;--line:#332f28;--accent:#4B86C6;--err:#E07A52}
+  }
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,sans-serif}
+  .lock{text-align:center;padding:34px 16px;max-width:370px;width:100%}
+  .kicker{color:var(--dim);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:16px}
+  h1{margin:0;font-weight:700;font-size:1.55rem;line-height:1.25;
+    font-family:"Charter","Bitstream Charter",Georgia,serif}
+  .hint{color:var(--dim);font-size:.9rem;margin:14px 0 24px}
+  form{display:flex;flex-direction:column;gap:11px}
+  input{padding:12px 14px;border:1px solid var(--line);border-radius:9px;
+    background:var(--card);color:var(--ink);font-size:1rem;outline:none;text-align:center}
+  input:focus{border-color:var(--accent)}
+  button{padding:12px 14px;border:none;border-radius:9px;background:var(--accent);
+    color:#fff;font-size:.95rem;font-weight:600;letter-spacing:.02em;cursor:pointer}
+  .err{color:var(--err);font-size:.85rem;margin-top:14px;min-height:1em}
+</style>
+</head>
+<body>
+<main class="lock">
+  <div class="kicker">Internal</div>
+  <h1>US macro forecast</h1>
+  <p class="hint">Enter the passphrase to open this page.</p>
+  <form id="f">
+    <input id="pw" type="password" autocomplete="current-password" autocapitalize="none"
+           autocorrect="off" spellcheck="false" placeholder="Passphrase" aria-label="Passphrase">
+    <button type="submit">Open</button>
+  </form>
+  <p id="err" class="err" aria-live="polite"></p>
+</main>
+<script id="site-payload" type="application/json">{"salt":"kvpgu3FNt7FEQvhv9c3jTA==","iv":"cCH1sGgK5p3EQE+6","ct":"AUQsBUYGdPIze9DJMRbm5PkpKw1TCnT0c+4g1V/M4hKqN+Hf8neIVSNinxDTTQv+IG1q6gPo3scr7r0cyhr4cjru6Wo/zBUrrVGYg39+fxOYsBuQ0sLZ1lCJ3rS8TGVE3pdPfZk+pAjZ2tpeTwouF/BrtFM2k7SqKVFC+7LbwpLDDAk7vyCYrEUZbban8Q5wZfVXTY5RKejEBefnktkWz+8Kb82iGW+CCGoM9Ox/GZjHx7rddpF2pA6LKSLqqnfVQ01ToEtlU5nRT/EcIdA7DVqX9dmMhEJJlxnM+bwe/7zhZ4OkNUz4VJ/XSgfvufQO2ldJv0GZn7KZ32jtt44SRmgxHXuEoDsI8NNx2PGLcvVRb7XrD3nM0DOUqkaHNoQV7DAbXc0uaEbvIJ3dB0LAtDwMjEqzxpQ7KC3yPzNZI/spdt29xgblnMgd+eyGxvIY8Dra14hMf3/73oFi7PB/UybKZVlnvf6gTgbfSG4+Ii8tfjtDEthrvCQei24AI+bKOzxNqTj7MOqLxUEiNuvAzI9Kw1dNVgIpMZP/D0qSa1QJIGECb7QPV+c=","iter":200000}</script>
+<script>
+const P = JSON.parse(document.getElementById("site-payload").textContent);
+const KEY = "jb-sites-passphrase";
+const b = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+const store = {
+  get(){ try { return sessionStorage.getItem(KEY); } catch { return null; } },
+  set(v){ try { sessionStorage.setItem(KEY, v); } catch {} },
+};
+async function decrypt(pw){
+  const baseKey = await crypto.subtle.importKey("raw", new TextEncoder().encode(pw), "PBKDF2", false, ["deriveKey"]);
+  const key = await crypto.subtle.deriveKey(
+    {name:"PBKDF2", salt:b(P.salt), iterations:P.iter, hash:"SHA-256"},
+    baseKey, {name:"AES-GCM", length:256}, false, ["decrypt"]);
+  return new TextDecoder().decode(await crypto.subtle.decrypt({name:"AES-GCM", iv:b(P.iv)}, key, b(P.ct)));
+}
+function show(page){
+  const hash = location.hash;
+  document.open(); document.write(page); document.close();
+  // Links such as model.html#section expect the browser to scroll after load.
+  if(hash) requestAnimationFrame(() => {
+    const el = document.getElementById(decodeURIComponent(hash.slice(1)));
+    if(el) el.scrollIntoView();
+  });
+}
+document.getElementById("f").addEventListener("submit", async e => {
+  e.preventDefault();
+  const err = document.getElementById("err");
+  const pw = document.getElementById("pw").value;
+  err.textContent = "Checking…";
+  let page;
+  try { page = await decrypt(pw); } catch { err.textContent = "That passphrase does not open this page."; return; }
+  store.set(pw);
+  show(page);
+});
+(async () => {
+  const saved = store.get();
+  if(!saved) return;
+  let page;
+  try { page = await decrypt(saved); } catch { return; }
+  show(page);
+})();
+</script>
+</body>
+</html>
